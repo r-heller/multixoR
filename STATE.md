@@ -7,7 +7,7 @@
 | B Eval/AI   | done        | A         | 2026-06-21   | mxo_evaluate, mxo_search, mxo_mcts, mxo_win_prob (calibrated default), mxo_rate_moves, mxo_ai_move. |
 | C Sim       | done        | B         | 2026-06-21   | mxo_policy, self-play, simulate, strategy (§12 timeline-win stress test), calibration; B-pass-2 swap shipped via R/sysdata.rda. |
 | D Viz       | done        | B         | 2026-06-21   | mxo_plot_board (slices+cube), multiverse / threats / win-prob / eval / opening / tree; autoplot. |
-| E App+Ship  | done        | C, D      | 2026-06-21   | mxo_run_app (Shiny + bslib + DT in Suggests), mxo_example_game, README, _pkgdown.yml, vignettes/multixoR.Rmd. Full pkg `R CMD check --as-cran` 0/0/0 across all stacks. |
+| E App+Ship  | done        | C, D      | 2026-06-21   | mxo_run_app (Shiny + bslib + DT in Suggests), mxo_example_game, README, _pkgdown.yml + themakR template, four vignettes (getting started / rules-and-geometry / analysis / simulation), CI for R-CMD-check + pkgdown + test-coverage, designer hex logo + favicons. Full pkg `R CMD check --as-cran` 0/0/0. |
 
 Status values: `not_started` | `in_progress` | `self_clean` | `integrated` | `done`.
 
