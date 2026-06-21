@@ -3,10 +3,10 @@
 ## Stacks
 | Stack       | Status      | Blocks on | Last updated | Notes |
 |-------------|-------------|-----------|--------------|-------|
-| A Core      | integrated  | —         | 2026-06-21   | 248 test assertions across 6 files; 121 directions confirmed; R CMD check --as-cran clean (0/0/0). |
-| B Eval/AI   | not_started | A         |              | Runnable. |
-| C Sim       | not_started | B         |              |       |
-| D Viz       | not_started | B         |              |       |
+| A Core      | integrated  | —         | 2026-06-21   | 248 assertions across 6 files; 121 directions confirmed; R CMD check --as-cran clean. |
+| B Eval/AI   | integrated  | A         | 2026-06-21   | Pass-1 — mxo_evaluate (vectorised line features), mxo_search (negamax+α-β), mxo_mcts (UCT), mxo_win_prob (placeholder logistic), mxo_rate_moves, mxo_ai_move. 5 new test files. R CMD check clean. |
+| C Sim       | not_started | B         |              | Runnable. |
+| D Viz       | not_started | B         |              | Runnable. |
 | E App+Ship  | not_started | C, D      |              |       |
 
 Status values: `not_started` | `in_progress` | `self_clean` | `integrated` | `done`.
@@ -17,7 +17,8 @@ Status values: `not_started` | `in_progress` | `self_clean` | `integrated` | `do
 - [ ] B's `mxo_win_prob()` uses the fitted curve (not the placeholder logistic)
 
 ## Runnable set
-- **B (Eval/AI)** — only Stack A is required, and A is `integrated`.
+- **C (Sim)** and **D (Viz)** — both depend on B = `integrated`, may proceed in
+  parallel (orchestrator §1).
 
 ## Open rule clarifications (multixoR_GAME_RULES.md amendments — 2026-06-21)
 1. **§4.1 — Present-move semantics fixed to View 1.** The placed mark is
@@ -45,3 +46,18 @@ Status values: `not_started` | `in_progress` | `self_clean` | `integrated` | `do
   tactics use mixed directions or `dL`-axis (branching).
 - `as_tibble.mxo_game` returns a generic `coord` list-column for
   `d_spatial != 3`; only the default 3-D case gets `x`/`y`/`z` columns.
+- **Stack B perf ceiling (pure R).** `mxo_evaluate()` is ~13 ms per call on a
+  3³ board with two plies; `mxo_search(depth = 2, branch_policy =
+  "promising")` is ~14 s on the same state. The branching factor explodes
+  with past boards.
+  - `mxo_ai_move(difficulty = "medium")` therefore uses
+    `branch_policy = "none"` in v1.0 instead of the orchestrator's
+    "promising depth ~3" target — restoring it requires either an Rcpp
+    hot-loop or incremental feature caching. Tracked for a future pass.
+  - MCTS heuristic rollouts (which call `mxo_evaluate` per step) are very
+    slow; the default rollout in user-facing entry points is the random
+    policy. The heuristic policy remains exposed via `rollout = "heuristic"`.
+- **B↔C handshake — pass-1 incomplete.** `mxo_win_prob(method = "heuristic")`
+  uses placeholder logistic constants (`.mxo_win_prob_constants` in
+  `R/mxo_win_prob.R`). Stack C must produce calibration data and re-fit
+  these constants; pin them with a regression test in B at that point.
