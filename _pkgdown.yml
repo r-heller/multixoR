@@ -5,11 +5,11 @@ home:
   description: Five-dimensional, multiverse tic-tac-toe in R.
 
 template:
+  package: themakR
   bootstrap: 5
   bslib:
     primary: "#5E2C8E"
     base_font: {google: "Inter"}
-  package: ~
 
 navbar:
   bg: primary

@@ -211,7 +211,10 @@ print.mxo_mcts_result <- function(x, top = 5L, ...) {
   ord <- order(-x$visits)
   show <- utils::head(ord, top)
   for (i in show) {
-    cli::cli_alert("{x$moves$kind[i]} L{x$moves$L_src[i]} t{x$moves$t_src[i]} idx{x$moves$idx[i]}: N={x$visits[i]}, Q={round(x$values[i], 3L)}")
+    cli::cli_alert(c(
+      "{x$moves$kind[i]} L{x$moves$L_src[i]} t{x$moves$t_src[i]} ",
+      "idx{x$moves$idx[i]}: N={x$visits[i]}, Q={round(x$values[i], 3L)}"
+    ))
   }
   invisible(x)
 }

@@ -15,7 +15,10 @@ print.mxo_game <- function(x, ...) {
   n_boards <- length(x$boards)
   who <- if (x$to_move == 1L) "X" else "O"
   cli::cli_h1("multixoR game")
-  cli::cli_alert_info("Config: n={cfg$n}, d_spatial={cfg$d_spatial}, k={cfg$k}, ply_cap={cfg$ply_cap}, max_timelines={cfg$max_timelines}")
+  cli::cli_alert_info(c(
+    "Config: n={cfg$n}, d_spatial={cfg$d_spatial}, k={cfg$k}, ",
+    "ply_cap={cfg$ply_cap}, max_timelines={cfg$max_timelines}"
+  ))
   cli::cli_alert_info("Multiverse: {n_timelines} timeline{?s}, {n_boards} board{?s}")
   cli::cli_alert_info("Plies played: {length(x$history)}; to move: {who}")
   cli::cli_alert_info("Status: {x$status}")

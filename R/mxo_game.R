@@ -93,7 +93,8 @@ validate_mxo_game <- function(x, call = rlang::caller_env()) {
   expected_to_move <- if (history_len %% 2L == 0L) 1L else 2L
   if (x$status == "in_progress" && x$to_move != expected_to_move) {
     cli::cli_abort(
-      "Parity mismatch: history length {history_len} implies {.val {expected_to_move}} to move, got {.val {x$to_move}}.",
+      c("Parity mismatch.",
+        i = "History length {history_len} implies {.val {expected_to_move}} to move; got {.val {x$to_move}}."),
       call = call
     )
   }
