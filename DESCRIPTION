@@ -27,16 +27,19 @@ Imports:
     ggplot2,
     plotly,
     rlang,
-    scales,
     stats,
     tibble,
     utils,
     withr
 Suggests:
+    bslib,
     covr,
+    DT,
     knitr,
     rmarkdown,
+    shiny,
     testthat (>= 3.0.0)
+VignetteBuilder: knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US

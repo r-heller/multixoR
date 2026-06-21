@@ -6,8 +6,8 @@
 | A Core      | integrated  | —         | 2026-06-21   | 248 assertions across 6 files; 121 directions confirmed; R CMD check --as-cran clean. |
 | B Eval/AI   | integrated  | A         | 2026-06-21   | Pass-1 — mxo_evaluate (vectorised line features), mxo_search (negamax+α-β), mxo_mcts (UCT), mxo_win_prob (placeholder logistic), mxo_rate_moves, mxo_ai_move. 5 new test files. R CMD check clean. |
 | C Sim       | integrated  | B         | 2026-06-21   | mxo_policy, self-play, batch simulate, opening/tournament/branch/timeline-win-rate, calibration + B-pass-2 swap (fitted default in R/sysdata.rda). 5 new test files; R CMD check clean. |
-| D Viz       | not_started | B         |              | Runnable. ggplot2/plotly/scales added to Imports. |
-| E App+Ship  | not_started | C, D      |              |       |
+| D Viz       | integrated  | B         | 2026-06-21   | mxo_plot_board (slices + cube), mxo_plot_multiverse, mxo_plot_threats, mxo_plot_win_prob/eval/opening, mxo_plot_tree, autoplot for game / sim / record. 6 new test files; R CMD check clean. |
+| E App+Ship  | not_started | C, D      |              | Runnable. |
 
 Status values: `not_started` | `in_progress` | `self_clean` | `integrated` | `done`.
 
@@ -21,8 +21,7 @@ Status values: `not_started` | `in_progress` | `self_clean` | `integrated` | `do
       a defensive fallback for builds where `sysdata.rda` is unavailable.
 
 ## Runnable set
-- **D (Viz)** — B is `integrated`. (C is also `integrated`; D was the other
-  parallel branch and is the remaining pre-E stack.)
+- **E (App + Ship)** — both C and D are `integrated`.
 
 ## Open rule clarifications (multixoR_GAME_RULES.md amendments — 2026-06-21)
 1. **§4.1 — Present-move semantics fixed to View 1.** The placed mark is

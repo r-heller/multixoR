@@ -8,6 +8,7 @@
 #' @importFrom rlang .data %||%
 #' @importFrom stats setNames
 #' @importFrom utils head tail
+#' @importFrom ggplot2 autoplot
 "_PACKAGE"
 
 ## usethis namespace: start
