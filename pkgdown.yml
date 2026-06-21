@@ -2,8 +2,11 @@ pandoc: 3.8.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
+  analysis: analysis.html
   multixoR: multixoR.html
-last_built: 2026-06-21T16:22Z
+  rules-and-geometry: rules-and-geometry.html
+  simulation: simulation.html
+last_built: 2026-06-21T16:26Z
 urls:
   reference: https://r-heller.github.io/multixoR/reference
   article: https://r-heller.github.io/multixoR/articles
