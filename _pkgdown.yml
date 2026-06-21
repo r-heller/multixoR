@@ -1,0 +1,82 @@
+url: https://r-heller.github.io/multixoR/
+
+template:
+  bootstrap: 5
+  bslib:
+    primary: "#5E2C8E"
+    base_font: {google: "Inter"}
+
+reference:
+- title: Game engine
+  desc: State, moves, history, and accessors.
+  contents:
+  - mxo_new_game
+  - mxo_move
+  - mxo_play
+  - mxo_legal_moves
+  - mxo_undo
+  - mxo_replay
+  - mxo_status
+  - mxo_is_terminal
+  - mxo_board
+  - mxo_timelines
+  - mxo_to_move
+  - mxo_config
+  - mxo_history
+  - is_mxo_game
+  - mxo_format_ply
+  - mxo_parse_ply
+  - print.mxo_game
+  - summary.mxo_game
+  - as_tibble.mxo_game
+
+- title: AI and evaluation
+  contents:
+  - mxo_evaluate
+  - mxo_search
+  - mxo_mcts
+  - print.mxo_mcts_result
+  - mxo_win_prob
+  - mxo_win_prob_curve
+  - mxo_rate_moves
+  - mxo_ai_move
+
+- title: Simulation and strategy
+  contents:
+  - mxo_policy
+  - is_mxo_policy
+  - mxo_policy_move
+  - print.mxo_policy
+  - mxo_config_default
+  - mxo_self_play
+  - print.mxo_game_record
+  - as_tibble.mxo_game_record
+  - mxo_simulate
+  - summary.mxo_sim_result
+  - print.mxo_sim_result
+  - mxo_opening_table
+  - mxo_policy_tournament
+  - mxo_branch_study
+  - mxo_timeline_win_rate
+  - mxo_make_calibration_data
+  - mxo_fit_calibration
+  - mxo_calibrator_predict
+  - print.mxo_calibrator
+
+- title: Visualisation
+  contents:
+  - mxo_plot_board
+  - mxo_plot_multiverse
+  - mxo_plot_threats
+  - mxo_plot_win_prob
+  - mxo_plot_eval
+  - mxo_plot_opening
+  - mxo_plot_tree
+  - autoplot.mxo_game
+  - autoplot.mxo_sim_result
+  - autoplot.mxo_game_record
+
+- title: App and example data
+  contents:
+  - mxo_run_app
+  - mxo_example_game

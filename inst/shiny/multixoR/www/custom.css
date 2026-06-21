@@ -1,0 +1,20 @@
+/* multixoR -- Hugo Coder accent palette */
+:root {
+  --mxo-accent: #5E2C8E;
+  --mxo-x: #1565C0;
+  --mxo-o: #C62828;
+}
+
+.btn-primary {
+  background-color: var(--mxo-accent);
+  border-color: var(--mxo-accent);
+}
+
+h4 {
+  color: var(--mxo-accent);
+  font-weight: 600;
+}
+
+.badge.bg-secondary {
+  background-color: var(--mxo-accent) !important;
+}

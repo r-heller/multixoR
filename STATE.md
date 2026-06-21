@@ -3,11 +3,11 @@
 ## Stacks
 | Stack       | Status      | Blocks on | Last updated | Notes |
 |-------------|-------------|-----------|--------------|-------|
-| A Core      | integrated  | —         | 2026-06-21   | 248 assertions across 6 files; 121 directions confirmed; R CMD check --as-cran clean. |
-| B Eval/AI   | integrated  | A         | 2026-06-21   | Pass-1 — mxo_evaluate (vectorised line features), mxo_search (negamax+α-β), mxo_mcts (UCT), mxo_win_prob (placeholder logistic), mxo_rate_moves, mxo_ai_move. 5 new test files. R CMD check clean. |
-| C Sim       | integrated  | B         | 2026-06-21   | mxo_policy, self-play, batch simulate, opening/tournament/branch/timeline-win-rate, calibration + B-pass-2 swap (fitted default in R/sysdata.rda). 5 new test files; R CMD check clean. |
-| D Viz       | integrated  | B         | 2026-06-21   | mxo_plot_board (slices + cube), mxo_plot_multiverse, mxo_plot_threats, mxo_plot_win_prob/eval/opening, mxo_plot_tree, autoplot for game / sim / record. 6 new test files; R CMD check clean. |
-| E App+Ship  | not_started | C, D      |              | Runnable. |
+| A Core      | done        | —         | 2026-06-21   | 248 assertions across 6 files; 121 directions confirmed. |
+| B Eval/AI   | done        | A         | 2026-06-21   | mxo_evaluate, mxo_search, mxo_mcts, mxo_win_prob (calibrated default), mxo_rate_moves, mxo_ai_move. |
+| C Sim       | done        | B         | 2026-06-21   | mxo_policy, self-play, simulate, strategy (§12 timeline-win stress test), calibration; B-pass-2 swap shipped via R/sysdata.rda. |
+| D Viz       | done        | B         | 2026-06-21   | mxo_plot_board (slices+cube), multiverse / threats / win-prob / eval / opening / tree; autoplot. |
+| E App+Ship  | done        | C, D      | 2026-06-21   | mxo_run_app (Shiny + bslib + DT in Suggests), mxo_example_game, README, _pkgdown.yml, vignettes/multixoR.Rmd. Full pkg `R CMD check --as-cran` 0/0/0 across all stacks. |
 
 Status values: `not_started` | `in_progress` | `self_clean` | `integrated` | `done`.
 
@@ -21,7 +21,9 @@ Status values: `not_started` | `in_progress` | `self_clean` | `integrated` | `do
       a defensive fallback for builds where `sysdata.rda` is unavailable.
 
 ## Runnable set
-- **E (App + Ship)** — both C and D are `integrated`.
+- All five stacks are `done`. The package is CRAN-clean
+  (`R CMD check --as-cran` → 0/0/0) and the bundled Shiny app launches via
+  `mxo_run_app()`.
 
 ## Open rule clarifications (multixoR_GAME_RULES.md amendments — 2026-06-21)
 1. **§4.1 — Present-move semantics fixed to View 1.** The placed mark is

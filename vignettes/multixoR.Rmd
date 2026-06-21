@@ -1,0 +1,90 @@
+---
+title: "Getting started with multixoR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with multixoR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>",
+                      fig.width = 6, fig.height = 4)
+```
+
+`multixoR` is a five-dimensional, multiverse variant of tic-tac-toe. Two
+players place marks on a 4×4×4 spatial cube; play also extends across a
+**time** axis (successive board states) and a **timeline** axis (parallel,
+branching universes). A player wins by making a length-3 line of their own
+colour along any axis or diagonal — including lines that traverse time or
+timelines.
+
+```{r quickstart}
+library(multixoR)
+
+g <- mxo_new_game()
+mxo_to_move(g)
+nrow(mxo_legal_moves(g))
+```
+
+## Two kinds of move
+
+A **present** move places the player's mark on an empty cell of the
+current present board and advances time by one step.
+
+```{r present}
+g <- mxo_move(g, "present", L_src = 0L, t_src = 0L, idx = 0L)   # X at (0,0,0)
+g <- mxo_move(g, "present", L_src = 0L, t_src = 1L, idx = 16L)  # O somewhere
+mxo_history(g)
+```
+
+A **branch** move places into an empty cell of a *past* board and spawns
+a new timeline that copies the source board plus the new mark. The source
+timeline is left untouched.
+
+```{r branch}
+g <- mxo_move(g, "branch", L_src = 0L, t_src = 0L, idx = 63L)
+mxo_timelines(g)
+```
+
+## Analysis
+
+Every analysis function in the package consumes the engine's state object
+directly — there is no parallel implementation.
+
+```{r analysis}
+mxo_evaluate(g)
+mxo_win_prob(g, method = "heuristic")
+```
+
+`mxo_rate_moves()` returns the type-stable per-move table the visualisation
+stack and the Shiny app consume; for the 4³ default it can be slow under
+the pure-R engine, so this vignette demonstrates it on a 3³ position.
+
+```{r rating}
+small <- mxo_new_game(n = 3L, k = 3L)
+small <- mxo_move(small, "present", 0L, 0L, 0L)
+head(mxo_rate_moves(small, method = "heuristic"), 6L)
+```
+
+## Visualisation
+
+`autoplot()` is the ergonomic dispatcher; the more specific renderers are
+also exported.
+
+```{r viz}
+library(ggplot2)
+autoplot(g)                                # multiverse overview
+autoplot(g, type = "board", L = 0L, t = 0L)
+autoplot(g, type = "threats")
+```
+
+## App
+
+`mxo_run_app()` launches a bundled Shiny app for interactive play and
+analysis. Requires the optional packages `shiny`, `bslib`, and `DT` (in
+`Suggests`).
+
+```{r app, eval = FALSE}
+mxo_run_app()
+```
