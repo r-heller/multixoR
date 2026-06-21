@@ -18,3 +18,4 @@
 ^data-raw$
 ^_pkgdown\.yml$
 ^README\.md$
+^\.github$
