@@ -6,14 +6,29 @@
 # `.mxo_win_prob_constants` with a fitted calibrator, ship it as internal
 # data, and a regression test will pin its outputs.
 
-# PLACEHOLDER LOGISTIC CONSTANTS -- provisional, to be replaced by Stack C
-# calibration. See `mxo_win_prob()`'s Calibration section.
+# Legacy placeholder logistic constants — used as a fallback when the
+# package-internal calibrator (`mxo_calibrator_default` in `R/sysdata.rda`)
+# has not been built yet. Pass-2 of the build replaces them; see
+# `data-raw/make_calibrator.R`.
 .mxo_win_prob_constants <- list(a = 0.01, b = 0)
 
 # Heuristic -> probability via logistic. Saturates smoothly for large |score|.
 .mxo_logistic_win_prob <- function(score, a, b) {
   z <- a * score + b
   1 / (1 + exp(-z))
+}
+
+# Resolve the active calibrator: prefer the fitted internal object, fall
+# back to the placeholder logistic.
+.mxo_active_calibrator <- function() {
+  ns <- asNamespace("multixoR")
+  if (exists("mxo_calibrator_default", envir = ns, inherits = FALSE)) {
+    return(get("mxo_calibrator_default", envir = ns))
+  }
+  structure(list(type = "logistic",
+                 a = .mxo_win_prob_constants$a,
+                 b = .mxo_win_prob_constants$b),
+            class = "mxo_calibrator")
 }
 
 #' Probability that a player wins from the current position
@@ -54,9 +69,8 @@ mxo_win_prob <- function(game, player = mxo_to_move(game),
   }
   if (method == "heuristic") {
     score <- mxo_evaluate(game, player = player, ...)
-    a <- .mxo_win_prob_constants$a
-    b <- .mxo_win_prob_constants$b
-    return(.mxo_logistic_win_prob(score, a, b))
+    cal <- .mxo_active_calibrator()
+    return(.mxo_predict_calibrator(cal, score))
   }
   res <- mxo_mcts(game, ...)
   # Root's W/N is from POV of `mxo_to_move(game)`. Convert to [0,1] win-rate

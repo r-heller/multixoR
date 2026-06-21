@@ -5,20 +5,24 @@
 |-------------|-------------|-----------|--------------|-------|
 | A Core      | integrated  | —         | 2026-06-21   | 248 assertions across 6 files; 121 directions confirmed; R CMD check --as-cran clean. |
 | B Eval/AI   | integrated  | A         | 2026-06-21   | Pass-1 — mxo_evaluate (vectorised line features), mxo_search (negamax+α-β), mxo_mcts (UCT), mxo_win_prob (placeholder logistic), mxo_rate_moves, mxo_ai_move. 5 new test files. R CMD check clean. |
-| C Sim       | not_started | B         |              | Runnable. |
-| D Viz       | not_started | B         |              | Runnable. |
+| C Sim       | integrated  | B         | 2026-06-21   | mxo_policy, self-play, batch simulate, opening/tournament/branch/timeline-win-rate, calibration + B-pass-2 swap (fitted default in R/sysdata.rda). 5 new test files; R CMD check clean. |
+| D Viz       | not_started | B         |              | Runnable. ggplot2/plotly/scales added to Imports. |
 | E App+Ship  | not_started | C, D      |              |       |
 
 Status values: `not_started` | `in_progress` | `self_clean` | `integrated` | `done`.
 
 ## Calibration handshake (B↔C)
-- [ ] C has produced `self_play_results.rds` (≥ N games)
-- [ ] B has fitted the win-prob calibration curve from C's data
-- [ ] B's `mxo_win_prob()` uses the fitted curve (not the placeholder logistic)
+- [x] C has produced self-play calibration data via `mxo_make_calibration_data()`
+      (the data-raw script runs a 40-game random-vs-random batch on 3^3, k=3).
+- [x] B has fitted the win-prob calibration curve from C's data
+      (`mxo_fit_calibration(type = "logistic")`).
+- [x] B's `mxo_win_prob()` uses the fitted curve via `R/sysdata.rda`
+      (`mxo_calibrator_default`), with the legacy logistic constants kept as
+      a defensive fallback for builds where `sysdata.rda` is unavailable.
 
 ## Runnable set
-- **C (Sim)** and **D (Viz)** — both depend on B = `integrated`, may proceed in
-  parallel (orchestrator §1).
+- **D (Viz)** — B is `integrated`. (C is also `integrated`; D was the other
+  parallel branch and is the remaining pre-E stack.)
 
 ## Open rule clarifications (multixoR_GAME_RULES.md amendments — 2026-06-21)
 1. **§4.1 — Present-move semantics fixed to View 1.** The placed mark is
