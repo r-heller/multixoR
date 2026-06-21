@@ -50,6 +50,9 @@ exceeded) and returns a per-root-move summary.
 \examples{
 g <- mxo_new_game(n = 3L, k = 3L)
 set.seed(1)
-res <- mxo_mcts(g, iterations = 50L, branch_policy = "none")
+# Use the fast random rollout so the example terminates in milliseconds;
+# heuristic rollouts are stronger but call mxo_evaluate() per step.
+res <- mxo_mcts(g, iterations = 30L, branch_policy = "none",
+                rollout = "random")
 res$move
 }
