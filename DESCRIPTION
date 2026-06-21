@@ -1,0 +1,41 @@
+Package: multixoR
+Title: Five-Dimensional Multiverse Tic-Tac-Toe
+Version: 0.1.0
+Authors@R:
+    person(given = "Raban",
+           family = "Heller",
+           role = c("aut", "cre"),
+           email = "raban.heller@charite.de",
+           comment = c(ORCID = "0000-0001-8006-9742"))
+Description: A five-dimensional, multiverse variant of tic-tac-toe. Two
+    players, 'X' and 'O', place marks on a four-by-four-by-four spatial
+    cube. Beyond the three spatial axes, play extends across a time axis
+    (successive board states) and a timeline axis (parallel, branching
+    universes). A player wins by completing a straight line of three marks
+    of their own colour along any axis or diagonal, including lines that
+    run through time and across timelines. The engine implements generic
+    'n^d' lattice geometry, single-placement plies, history-immutable
+    branching into the past, and incremental cross-axis win detection.
+License: MIT + file LICENSE
+URL: https://github.com/r-heller/multixoR,
+    https://r-heller.github.io/multixoR/
+BugReports: https://github.com/r-heller/multixoR/issues
+Depends:
+    R (>= 4.1)
+Imports:
+    cli,
+    rlang,
+    stats,
+    tibble,
+    utils
+Suggests:
+    covr,
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0),
+    withr
+Config/testthat/edition: 3
+Encoding: UTF-8
+Language: en-US
+Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.0.0

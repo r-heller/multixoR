@@ -1,0 +1,17 @@
+^\.git$
+^\.gitignore$
+^\.github$
+^\.DS_Store$
+^.*\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^pipeline$
+^multixoR_pipeline\.zip$
+^STATE\.md$
+^README\.Rmd$
+^cran-comments\.md$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^doc$
+^Meta$
