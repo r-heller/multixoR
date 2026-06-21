@@ -14,7 +14,11 @@ local({
   difficulty <- getOption("mxo_app_difficulty", "medium")
 
   ui <- bslib::page_sidebar(
-    title = "multixoR",
+    title = shiny::tagList(
+      shiny::tags$img(src = "logo.png", height = "32px",
+                      style = "margin-right: 8px;"),
+      "multixoR"
+    ),
     theme = bslib::bs_theme(
       version = 5L, primary = "#5E2C8E",
       base_font = bslib::font_google("Inter")

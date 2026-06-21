@@ -1,0 +1,83 @@
+<svg width="520" height="600" viewBox="0 0 520 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#21123a"/>
+      <stop offset="55%" stop-color="#170d28"/>
+      <stop offset="100%" stop-color="#0d0718"/>
+    </linearGradient>
+    <linearGradient id="innerGlow" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#5E2C8E" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#5E2C8E" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="border" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#C44EC9"/>
+      <stop offset="50%" stop-color="#FF6B9D"/>
+      <stop offset="100%" stop-color="#7C5BD9"/>
+    </linearGradient>
+    <radialGradient id="coreGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#C44EC9" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#C44EC9" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <polygon points="260,38 486.9,169 486.9,431 260,562 33.1,431 33.1,169" fill="url(#bg)"/>
+  <polygon points="260,38 486.9,169 486.9,431 260,562 33.1,431 33.1,169" fill="url(#innerGlow)"/>
+
+  <ellipse cx="260" cy="300" rx="180" ry="170" fill="url(#coreGlow)"/>
+
+  <g transform="translate(0,52)">
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M150,330 Q205,300 250,250" stroke="#C44EC9" stroke-width="3.8" opacity="0.7"/>
+      <path d="M250,250 Q315,205 360,162" stroke="#C44EC9" stroke-width="3.8" opacity="0.55"/>
+      <path d="M250,250 Q300,255 338,300" stroke="#7C5BD9" stroke-width="3.2" opacity="0.6" stroke-dasharray="2 7"/>
+    </g>
+    <g fill="none" stroke-linejoin="round" stroke-linecap="round" stroke="#4ED0E0" stroke-width="4.4" filter="url(#soft)">
+      <polygon points="118,300 188,300 188,370 118,370"/>
+      <polygon points="146,272 216,272 216,342 146,342"/>
+      <line x1="118" y1="300" x2="146" y2="272"/>
+      <line x1="188" y1="300" x2="216" y2="272"/>
+      <line x1="188" y1="370" x2="216" y2="342"/>
+      <line x1="118" y1="370" x2="146" y2="342"/>
+    </g>
+    <g fill="none" stroke-linejoin="round" stroke-linecap="round" stroke="#B79BEC" stroke-width="3.4" opacity="0.95">
+      <polygon points="223,228 277,228 277,282 223,282"/>
+      <polygon points="245,206 299,206 299,260 245,260"/>
+      <line x1="223" y1="228" x2="245" y2="206"/>
+      <line x1="277" y1="228" x2="299" y2="206"/>
+      <line x1="277" y1="282" x2="299" y2="260"/>
+      <line x1="223" y1="282" x2="245" y2="260"/>
+    </g>
+    <g fill="none" stroke-linejoin="round" stroke-linecap="round" stroke="#8A6FD0" stroke-width="2.8" opacity="0.8">
+      <polygon points="340,146 380,146 380,186 340,186"/>
+      <polygon points="356,130 396,130 396,170 356,170"/>
+      <line x1="340" y1="146" x2="356" y2="130"/>
+      <line x1="380" y1="146" x2="396" y2="130"/>
+      <line x1="380" y1="186" x2="396" y2="170"/>
+      <line x1="340" y1="186" x2="356" y2="170"/>
+    </g>
+    <g fill="none" stroke-linejoin="round" stroke-linecap="round" stroke="#7C5BD9" stroke-width="2.4" opacity="0.5">
+      <polygon points="320,288 354,288 354,322 320,322"/>
+      <polygon points="334,275 368,275 368,309 334,309"/>
+      <line x1="320" y1="288" x2="334" y2="275"/>
+      <line x1="354" y1="288" x2="368" y2="275"/>
+      <line x1="354" y1="322" x2="368" y2="309"/>
+      <line x1="320" y1="322" x2="334" y2="309"/>
+    </g>
+    <circle cx="150" cy="330" r="12" fill="#0d0718" stroke="#4ED0E0" stroke-width="4.4" filter="url(#soft)"/>
+    <g stroke="#FF6B9D" stroke-width="4.8" stroke-linecap="round" filter="url(#soft)">
+      <line x1="240" y1="244" x2="260" y2="264"/>
+      <line x1="260" y1="244" x2="240" y2="264"/>
+    </g>
+    <g stroke="#FF6B9D" stroke-width="3.8" stroke-linecap="round" filter="url(#soft)" opacity="0.9">
+      <line x1="349" y1="152" x2="367" y2="170"/>
+      <line x1="367" y1="152" x2="349" y2="170"/>
+    </g>
+  </g>
+
+  <polygon points="260,38 486.9,169 486.9,431 260,562 33.1,431 33.1,169" fill="none" stroke="url(#border)" stroke-width="11" stroke-linejoin="round"/>
+  <polygon points="260,56 471.3,178 471.3,422 260,544 48.7,422 48.7,178" fill="none" stroke="#FF6B9D" stroke-width="1.5" stroke-linejoin="round" opacity="0.35"/>
+</svg>

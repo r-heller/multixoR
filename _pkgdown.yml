@@ -1,10 +1,21 @@
 url: https://r-heller.github.io/multixoR/
 
+home:
+  title: multixoR
+  description: Five-dimensional, multiverse tic-tac-toe in R.
+
 template:
   bootstrap: 5
   bslib:
     primary: "#5E2C8E"
     base_font: {google: "Inter"}
+  package: ~
+
+navbar:
+  bg: primary
+
+figures:
+  fig.retina: 2
 
 reference:
 - title: Game engine
