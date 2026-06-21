@@ -141,33 +141,35 @@ stress-test number — the <strong>fraction of decisive games whose
 winning line crosses timelines</strong> — the diagnostic the
 orchestrator flagged as the rules’ main balance concern.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mxo_simulate.html">mxo_simulate</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="co"># Tiny `n_games` to keep the vignette build well under a minute on the</span></span>
+<span><span class="co"># pure-R engine; bump these up for real analyses.</span></span>
+<span><span class="va">sim</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mxo_simulate.html">mxo_simulate</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/mxo_policy.html">mxo_policy</a></span><span class="op">(</span><span class="st">"random"</span>, branch_policy <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="../reference/mxo_policy.html">mxo_policy</a></span><span class="op">(</span><span class="st">"random"</span>, branch_policy <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span>,</span>
-<span>  n_games <span class="op">=</span> <span class="fl">20L</span>,</span>
-<span>  config <span class="op">=</span> <span class="fu"><a href="../reference/mxo_config_default.html">mxo_config_default</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3L</span>, k <span class="op">=</span> <span class="fl">3L</span>, ply_cap <span class="op">=</span> <span class="fl">8L</span><span class="op">)</span>,</span>
+<span>  n_games <span class="op">=</span> <span class="fl">6L</span>,</span>
+<span>  config <span class="op">=</span> <span class="fu"><a href="../reference/mxo_config_default.html">mxo_config_default</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3L</span>, k <span class="op">=</span> <span class="fl">3L</span>, ply_cap <span class="op">=</span> <span class="fl">6L</span><span class="op">)</span>,</span>
 <span>  seed <span class="op">=</span> <span class="fl">7L</span>, record_eval <span class="op">=</span> <span class="cn">FALSE</span>, progress <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">sim</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">multixoR simulation summary</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Games: 20</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Games: 6</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Win rates: X = 0; O = 0; draws = 1</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Mean plies: 8; mean timelines: 4.7</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Mean plies: 6; mean timelines: 4.33</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Cross-timeline-win fraction: NA</span></span></code></pre></div>
 <p><code><a href="../reference/mxo_timeline_win_rate.html">mxo_timeline_win_rate()</a></code> returns the same number with a
 per-axis-class breakdown.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/mxo_timeline_win_rate.html">mxo_timeline_win_rate</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/mxo_policy.html">mxo_policy</a></span><span class="op">(</span><span class="st">"random"</span><span class="op">)</span>, <span class="fu"><a href="../reference/mxo_policy.html">mxo_policy</a></span><span class="op">(</span><span class="st">"random"</span><span class="op">)</span>,</span>
-<span>  n_games <span class="op">=</span> <span class="fl">20L</span>,</span>
-<span>  config <span class="op">=</span> <span class="fu"><a href="../reference/mxo_config_default.html">mxo_config_default</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3L</span>, k <span class="op">=</span> <span class="fl">3L</span>, ply_cap <span class="op">=</span> <span class="fl">8L</span><span class="op">)</span>,</span>
+<span>  n_games <span class="op">=</span> <span class="fl">6L</span>,</span>
+<span>  config <span class="op">=</span> <span class="fu"><a href="../reference/mxo_config_default.html">mxo_config_default</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3L</span>, k <span class="op">=</span> <span class="fl">3L</span>, ply_cap <span class="op">=</span> <span class="fl">6L</span><span class="op">)</span>,</span>
 <span>  seed <span class="op">=</span> <span class="fl">7L</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
 <span><span class="co">#&gt;   n_games n_wins cross_timeline_wins cross_timeline_fraction spatial  time</span></span>
 <span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>      20      0                   0                      <span style="color: #BB0000;">NA</span>       0     0</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>       6      0                   0                      <span style="color: #BB0000;">NA</span>       0     0</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: timeline &lt;int&gt;, mixed &lt;int&gt;</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -179,8 +181,8 @@ renders the resulting win-rate heatmap as Z-slices.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mxo_opening_table.html">mxo_opening_table</a></span><span class="op">(</span></span>
 <span>  opponent <span class="op">=</span> <span class="fu"><a href="../reference/mxo_policy.html">mxo_policy</a></span><span class="op">(</span><span class="st">"random"</span><span class="op">)</span>,</span>
-<span>  n_games_per_cell <span class="op">=</span> <span class="fl">2L</span>,</span>
-<span>  config <span class="op">=</span> <span class="fu"><a href="../reference/mxo_config_default.html">mxo_config_default</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3L</span>, k <span class="op">=</span> <span class="fl">3L</span>, ply_cap <span class="op">=</span> <span class="fl">6L</span><span class="op">)</span>,</span>
+<span>  n_games_per_cell <span class="op">=</span> <span class="fl">1L</span>,</span>
+<span>  config <span class="op">=</span> <span class="fu"><a href="../reference/mxo_config_default.html">mxo_config_default</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3L</span>, k <span class="op">=</span> <span class="fl">3L</span>, ply_cap <span class="op">=</span> <span class="fl">4L</span><span class="op">)</span>,</span>
 <span>  seed <span class="op">=</span> <span class="fl">1L</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/mxo_plot_opening.html">mxo_plot_opening</a></span><span class="op">(</span><span class="va">tab</span>, n <span class="op">=</span> <span class="fl">3L</span>, d_spatial <span class="op">=</span> <span class="fl">3L</span><span class="op">)</span></span></code></pre></div>

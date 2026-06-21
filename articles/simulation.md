@@ -67,19 +67,21 @@ orchestrator flagged as the rules’ main balance concern.
 
 ``` r
 
+# Tiny `n_games` to keep the vignette build well under a minute on the
+# pure-R engine; bump these up for real analyses.
 sim <- mxo_simulate(
   mxo_policy("random", branch_policy = "all"),
   mxo_policy("random", branch_policy = "all"),
-  n_games = 20L,
-  config = mxo_config_default(n = 3L, k = 3L, ply_cap = 8L),
+  n_games = 6L,
+  config = mxo_config_default(n = 3L, k = 3L, ply_cap = 6L),
   seed = 7L, record_eval = FALSE, progress = FALSE
 )
 summary(sim)
 #> 
 #> ── multixoR simulation summary ─────────────────────────────────────────────────
-#> ℹ Games: 20
+#> ℹ Games: 6
 #> ℹ Win rates: X = 0; O = 0; draws = 1
-#> ℹ Mean plies: 8; mean timelines: 4.7
+#> ℹ Mean plies: 6; mean timelines: 4.33
 #> ℹ Cross-timeline-win fraction: NA
 ```
 
@@ -90,14 +92,14 @@ returns the same number with a per-axis-class breakdown.
 
 mxo_timeline_win_rate(
   mxo_policy("random"), mxo_policy("random"),
-  n_games = 20L,
-  config = mxo_config_default(n = 3L, k = 3L, ply_cap = 8L),
+  n_games = 6L,
+  config = mxo_config_default(n = 3L, k = 3L, ply_cap = 6L),
   seed = 7L
 )
 #> # A tibble: 1 × 8
 #>   n_games n_wins cross_timeline_wins cross_timeline_fraction spatial  time
 #>     <int>  <int>               <int>                   <dbl>   <int> <int>
-#> 1      20      0                   0                      NA       0     0
+#> 1       6      0                   0                      NA       0     0
 #> # ℹ 2 more variables: timeline <int>, mixed <int>
 ```
 
@@ -112,8 +114,8 @@ renders the resulting win-rate heatmap as Z-slices.
 
 tab <- mxo_opening_table(
   opponent = mxo_policy("random"),
-  n_games_per_cell = 2L,
-  config = mxo_config_default(n = 3L, k = 3L, ply_cap = 6L),
+  n_games_per_cell = 1L,
+  config = mxo_config_default(n = 3L, k = 3L, ply_cap = 4L),
   seed = 1L
 )
 mxo_plot_opening(tab, n = 3L, d_spatial = 3L)
