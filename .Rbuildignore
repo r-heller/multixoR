@@ -11,11 +11,10 @@
 ^README\.Rmd$
 ^cran-comments\.md$
 ^_pkgdown\.yml$
+^codecov\.yml$
 ^docs$
 ^pkgdown$
 ^doc$
 ^Meta$
 ^data-raw$
-^_pkgdown\.yml$
-^README\.md$
-^\.github$
+^HANDOFF\.md$
