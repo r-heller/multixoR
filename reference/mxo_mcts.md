@@ -71,10 +71,13 @@ An object of class `mxo_mcts_result`.
 ``` r
 g <- mxo_new_game(n = 3L, k = 3L)
 set.seed(1)
-res <- mxo_mcts(g, iterations = 50L, branch_policy = "none")
+# Use the fast random rollout so the example terminates in milliseconds;
+# heuristic rollouts are stronger but call mxo_evaluate() per step.
+res <- mxo_mcts(g, iterations = 30L, branch_policy = "none",
+                rollout = "random")
 res$move
 #> # A tibble: 1 × 5
 #>   kind    L_src t_src   idx player
 #>   <chr>   <int> <int> <int>  <int>
-#> 1 present     0     0     1      1
+#> 1 present     0     0     0      1
 ```
