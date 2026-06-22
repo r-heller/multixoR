@@ -9,4 +9,8 @@
 doc/
 Meta/
 docs/
-.claude/
+*.tmp
+*.log
+*~
+*.bak
+*.orig
