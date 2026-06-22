@@ -1,0 +1,106 @@
+---
+title: "5. Strategy, evaluation and AI"
+description: >
+  Reading positions with the heuristic evaluator and win probability, rating
+  every legal move, and the search and MCTS engines behind the built-in AI.
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE, comment = "#>",
+  fig.width = 7, fig.height = 4.5, dpi = 120, out.width = "100%"
+)
+library(multixoR)
+library(ggplot2)
+```
+
+[Part 4](tutorial-4-winning.html) showed how lines complete. This page is about
+*judging* a position before it is won, and letting the package play for you.
+Every analysis function here consumes the engine's state object directly --
+there is one engine and one evaluator behind the app, the simulations, and the
+AI.
+
+## Evaluating a position
+
+`mxo_evaluate()` returns a single heuristic score from the side-to-move's point
+of view. It weighs each player's threatened lines across all axis classes:
+
+```{r evaluate}
+g <- mxo_example_game()
+mxo_evaluate(g)
+```
+
+`mxo_win_prob()` maps that score onto a calibrated `[0, 1]` win probability,
+which is easier to reason about than a raw heuristic:
+
+```{r winprob}
+mxo_win_prob(g, method = "heuristic")
+```
+
+## Rating every legal move
+
+`mxo_rate_moves()` is the type-stable per-move table the visualisation stack
+and the Shiny app consume: it scores and ranks every legal move. On the full
+`4^3` cube this is heavy under the pure-R engine, so -- as in the package's own
+vignettes -- we demonstrate it on a smaller `3^3` position:
+
+```{r rate}
+small <- mxo_new_game(n = 3L, k = 3L)
+small <- mxo_move(small, "present", 0L, 0L, 0L)
+head(mxo_rate_moves(small, method = "heuristic"), 6)
+```
+
+The `rank` and `label` columns make it easy to surface the best moves -- exactly
+what the app's overlays do.
+
+## Searching ahead
+
+`mxo_search()` runs alpha-beta negamax to a fixed depth. The `branch_policy`
+argument controls whether the search is allowed to consider branch moves
+(`"none"`, `"promising"`, or `"all"`), which matters a great deal because
+branching explodes the move count:
+
+```{r search}
+mxo_search(g, depth = 1L, branch_policy = "none")$move
+```
+
+For deeper, anytime search there is `mxo_mcts()`, a Monte-Carlo tree search.
+It is randomised, so we pass a `seed` for reproducibility and keep the example
+small and fast (a `3^3` board, a modest iteration budget, random rollouts):
+
+```{r mcts}
+mcts <- mxo_mcts(
+  mxo_new_game(n = 3L, k = 3L),
+  iterations = 40L, rollout = "random", seed = 1L
+)
+mcts
+```
+
+## Just give me a move
+
+For casual play you do not need any of the above directly. `mxo_ai_move()`
+wraps the search behind three difficulty levels and returns a single move; pass
+a `seed` to make it reproducible:
+
+```{r ai}
+mxo_ai_move(g, difficulty = "easy", seed = 1L)
+mxo_ai_move(g, difficulty = "medium", seed = 1L)
+```
+
+## Strategy in a nutshell
+
+- **Count threats, not marks.** A position is strong when you have more
+  near-complete lines than your opponent -- `mxo_plot_threats()` and
+  `mxo_evaluate()` both encode this.
+- **Branches are weapons.** A timeline-axis or mixed threat can come from a
+  universe your opponent is ignoring. Watch *all* timelines.
+- **Respect the placement rule.** Because a win must pass through your latest
+  placement, tempo matters: you cannot bank a propagated line for later.
+
+Everything on this page is also available interactively -- which is the subject
+of the final page.
+
+---
+
+**Previous:** [4. Winning across space, time and timelines](tutorial-4-winning.html) &nbsp;|&nbsp;
+**Next:** [6. Playing in the Shiny app →](tutorial-6-the-app.html)

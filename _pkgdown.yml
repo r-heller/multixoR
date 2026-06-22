@@ -11,11 +11,47 @@ template:
     primary: "#5E2C8E"
     base_font: {google: "Inter"}
 
-navbar:
-  bg: primary
-
 figures:
   fig.retina: 2
+
+articles:
+- title: Tutorial
+  navbar: ~
+  contents:
+  - articles/tutorial-1-the-board
+  - articles/tutorial-2-first-game
+  - articles/tutorial-3-branching
+  - articles/tutorial-4-winning
+  - articles/tutorial-5-strategy-ai
+  - articles/tutorial-6-the-app
+- title: Reference articles
+  desc: Concise topic guides.
+  contents:
+  - multixoR
+  - rules-and-geometry
+  - analysis
+  - simulation
+
+navbar:
+  bg: primary
+  structure:
+    left: [tutorial, intro, reference, articles, news]
+  components:
+    tutorial:
+      text: Tutorial
+      menu:
+      - text: "1. The board & the five axes"
+        href: articles/tutorial-1-the-board.html
+      - text: "2. Playing your first game"
+        href: articles/tutorial-2-first-game.html
+      - text: "3. Branching into the past"
+        href: articles/tutorial-3-branching.html
+      - text: "4. Winning across space, time & timelines"
+        href: articles/tutorial-4-winning.html
+      - text: "5. Strategy, evaluation & AI"
+        href: articles/tutorial-5-strategy-ai.html
+      - text: "6. Playing in the Shiny app"
+        href: articles/tutorial-6-the-app.html
 
 reference:
 - title: Game engine
