@@ -6,7 +6,13 @@ articles:
   multixoR: multixoR.html
   rules-and-geometry: rules-and-geometry.html
   simulation: simulation.html
-last_built: 2026-06-21T20:10Z
+  articles/tutorial-1-the-board: tutorial-1-the-board.html
+  articles/tutorial-2-first-game: tutorial-2-first-game.html
+  articles/tutorial-3-branching: tutorial-3-branching.html
+  articles/tutorial-4-winning: tutorial-4-winning.html
+  articles/tutorial-5-strategy-ai: tutorial-5-strategy-ai.html
+  articles/tutorial-6-the-app: tutorial-6-the-app.html
+last_built: 2026-06-22T07:05Z
 urls:
   reference: https://r-heller.github.io/multixoR/reference
   article: https://r-heller.github.io/multixoR/articles
