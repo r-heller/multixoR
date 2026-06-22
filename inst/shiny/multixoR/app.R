@@ -3,7 +3,11 @@
 # Modules live under modules/ and are sourced relative to this file.
 
 local({
-  app_dir <- dirname(sys.frame(1)$ofile %||% getwd())
+  # When sourced as a file (e.g. RStudio "Run App"), `ofile` is the path to
+  # this file; otherwise `shiny::runApp()` has already set the working
+  # directory to the app directory, so `getwd()` is correct.
+  this_file <- sys.frame(1)$ofile
+  app_dir <- if (is.null(this_file)) getwd() else dirname(this_file)
   for (m in list.files(file.path(app_dir, "modules"),
                        pattern = "\\.R$", full.names = TRUE)) {
     source(m, local = TRUE)
