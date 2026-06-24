@@ -14,3 +14,4 @@ docs/
 *~
 *.bak
 *.orig
+_coverage/

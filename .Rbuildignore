@@ -12,6 +12,7 @@
 ^cran-comments\.md$
 ^_pkgdown\.yml$
 ^codecov\.yml$
+^_coverage$
 ^docs$
 ^pkgdown$
 ^doc$

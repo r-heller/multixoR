@@ -11,6 +11,9 @@ template:
     primary: "#5E2C8E"
     base_font: {google: "Inter"}
 
+development:
+  mode: auto
+
 figures:
   fig.retina: 2
 
