@@ -5,14 +5,6 @@
 > self-play, calibration, ggplot2/plotly visualisation, and a bundled
 > Shiny app.
 
-[![R-CMD-check](https://github.com/r-heller/multixoR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-heller/multixoR/actions/workflows/R-CMD-check.yaml)
-[![pkgdown](https://github.com/r-heller/multixoR/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/r-heller/multixoR/actions/workflows/pkgdown.yaml)
-[![codecov](https://codecov.io/gh/r-heller/multixoR/graph/badge.svg)](https://app.codecov.io/gh/r-heller/multixoR)
-[![License:
-MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-
 ## What
 
 `multixoR` is a five-dimensional, multiverse variant of tic-tac-toe. Two

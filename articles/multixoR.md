@@ -1,5 +1,20 @@
 # Getting started with multixoR
 
+[![R-CMD-check](https://github.com/r-heller/multixoR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-heller/multixoR/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/r-heller/multixoR/actions/workflows/pkgdown.yaml/badge.svg)](https://r-heller.github.io/multixoR/)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/multixoR)](https://CRAN.R-project.org/package=multixoR)
+[![Codecov test
+coverage](https://codecov.io/gh/r-heller/multixoR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-heller/multixoR?branch=main)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/multixoR)](https://cran.r-project.org/package=multixoR)
+[![CRAN downloads
+total](https://cranlogs.r-pkg.org/badges/grand-total/multixoR)](https://cran.r-project.org/package=multixoR)
+[![License:
+MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+
 `multixoR` is a five-dimensional, multiverse variant of tic-tac-toe. Two
 players place marks on a 4×4×4 spatial cube; play also extends across a
 **time** axis (successive board states) and a **timeline** axis
