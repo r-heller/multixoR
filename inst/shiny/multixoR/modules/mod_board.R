@@ -1,6 +1,5 @@
 # Board module: renders either the multiverse overview or a single board.
-# Click-to-move via plotly events is captured here, mapped via
-# `multixoR:::.mxo_cube_coords`, and applied to `state$game`.
+# Legal moves are selected in the controls module; these plots are views.
 
 mxo_mod_board_ui <- function(id, view = c("multiverse", "board")) {
   ns <- shiny::NS(id)
@@ -38,10 +37,10 @@ mxo_mod_board_server <- function(id, state, view = c("multiverse", "board")) {
         } else NULL
         p <- tryCatch(
           multixoR::mxo_plot_board(state$game,
-                                   L = input$L %||% 0L,
-                                   t = input$t %||% 0L,
+                                   L = if (is.null(input$L)) 0L else input$L,
+                                   t = if (is.null(input$t)) 0L else input$t,
                                    view = "cube",
-                                   overlay = input$overlay %||% "none",
+                                   overlay = if (is.null(input$overlay)) "none" else input$overlay,
                                    rating = rating),
           error = function(e) {
             plotly::plot_ly() |>

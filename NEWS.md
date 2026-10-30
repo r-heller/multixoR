@@ -1,3 +1,15 @@
+# multixoR development
+
+* Make human play functional in the Shiny controls, honor initial difficulty,
+  add AI replies and explicit AI stepping, and check the required plotly dependency.
+
+* Forward named AI/rating engine arguments, including explicit `NULL` budgets.
+* Bound hard AI with cooperative deadline checks through tree traversal and
+  rollouts; use random rollouts for MCTS move ratings by default.
+* Rank search ratings by search value and leave unsupported probability labels
+  missing. Reject invalid or fractional search depths before conversion.
+* Store distinct isotonic knots and handle constant-score calibration data.
+
 # multixoR 0.1.0
 
 Initial release.

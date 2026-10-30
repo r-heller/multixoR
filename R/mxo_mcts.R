@@ -6,21 +6,23 @@
 # Run a rollout from `game` to terminal (or `rollout_depth`) and return the
 # rollout value in [-1, 1] from the perspective of the *initial* player to
 # move.
-.mxo_rollout <- function(game, rollout, branch_policy, rollout_depth, epsilon) {
+.mxo_rollout <- function(game, rollout, branch_policy, rollout_depth, epsilon, expired = function() FALSE) {
   pov <- mxo_to_move(game)
   g <- game
   steps <- 0L
-  while (!mxo_is_terminal(g) && steps < rollout_depth) {
+  while (!mxo_is_terminal(g) && steps < rollout_depth && !expired()) {
     moves <- .mxo_filter_legal_moves(g, branch_policy)
-    if (nrow(moves) == 0L) break
+    if (nrow(moves) == 0L || expired()) break
     i <- if (rollout == "heuristic" && stats::runif(1L) < epsilon) {
-      scores <- vapply(seq_len(nrow(moves)), function(j) {
+      scores <- rep(-Inf, nrow(moves))
+      for (j in seq_len(nrow(moves))) {
+        if (expired()) break
         g2 <- mxo_move(g, kind = moves$kind[[j]],
                        L_src = moves$L_src[[j]],
                        t_src = moves$t_src[[j]],
                        idx = moves$idx[[j]])
-        -mxo_evaluate(g2, player = mxo_to_move(g2))
-      }, numeric(1L))
+        scores[j] <- -mxo_evaluate(g2, player = mxo_to_move(g2))
+      }
       which.max(scores)
     } else {
       sample.int(nrow(moves), 1L)
@@ -53,7 +55,9 @@
 #' @param branch_policy One of `"promising"` (default), `"all"`, `"none"`.
 #'   See [mxo_search()] for the trade-off.
 #' @param time_budget Optional numeric. If supplied, stops once the elapsed
-#'   wall time exceeds this many seconds.
+#'   elapsed time reaches this many seconds. The budget is cooperative: it is
+#'   checked during tree selection and rollouts, but one move-generation or
+#'   evaluation operation may finish after the deadline.
 #' @param rollout_depth Maximum rollout depth in plies. Defaults to the
 #'   game's `ply_cap`.
 #' @param epsilon Probability of taking the greedy move during a heuristic
@@ -64,7 +68,7 @@
 #' @examples
 #' g <- mxo_new_game(n = 3L, k = 3L)
 #' set.seed(1)
-#' # Use the fast random rollout so the example terminates in milliseconds;
+#' # Use random rollouts here;
 #' # heuristic rollouts are stronger but call mxo_evaluate() per step.
 #' res <- mxo_mcts(g, iterations = 30L, branch_policy = "none",
 #'                 rollout = "random")
@@ -82,6 +86,16 @@ mxo_mcts <- function(game,
   if (!is_mxo_game(game)) {
     cli::cli_abort("{.arg game} must be an {.cls mxo_game} object.", call = call)
   }
+  valid_count <- function(x) is.numeric(x) && length(x) == 1L && is.finite(x) && x >= 1 && x == floor(x) && x <= .Machine$integer.max
+  if (!valid_count(iterations)) cli::cli_abort("{.arg iterations} must be a positive integer.", call = call)
+  if (!is.null(rollout_depth) && !valid_count(rollout_depth)) cli::cli_abort("{.arg rollout_depth} must be a positive integer.", call = call)
+  if (!is.null(time_budget) && (!is.numeric(time_budget) || length(time_budget) != 1L || !is.finite(time_budget) || time_budget <= 0)) {
+    cli::cli_abort("{.arg time_budget} must be a finite positive number or NULL.", call = call)
+  }
+  if (!is.numeric(c_uct) || length(c_uct) != 1L || !is.finite(c_uct) || c_uct < 0) cli::cli_abort("{.arg c_uct} must be finite and non-negative.", call = call)
+  if (!is.numeric(epsilon) || length(epsilon) != 1L || !is.finite(epsilon) || epsilon < 0 || epsilon > 1) cli::cli_abort("{.arg epsilon} must be in [0,1].", call = call)
+  start_time <- proc.time()[["elapsed"]]
+  expired <- function() !is.null(time_budget) && proc.time()[["elapsed"]] - start_time >= time_budget
   rollout <- match.arg(rollout)
   branch_policy <- match.arg(branch_policy)
   if (!is.null(seed)) withr::local_seed(seed)
@@ -114,7 +128,7 @@ mxo_mcts <- function(game,
     path <- nid
     repeat {
       node <- get(as.character(nid), envir = tree)
-      if (node$terminal) break
+      if (node$terminal || expired()) break
       if (nrow(node$moves) == 0L) break
       unexp <- which(node$child_ids == 0L)
       if (length(unexp) > 0L) {
@@ -143,7 +157,7 @@ mxo_mcts <- function(game,
     rollout_value <- if (leaf$terminal) {
       leaf$terminal_value
     } else {
-      .mxo_rollout(leaf$game, rollout, branch_policy, rollout_depth, epsilon)
+      .mxo_rollout(leaf$game, rollout, branch_policy, rollout_depth, epsilon, expired)
     }
     val <- rollout_value
     for (i in rev(seq_along(path))) {
@@ -155,16 +169,15 @@ mxo_mcts <- function(game,
       val <- -val
     }
   }
-  start_time <- Sys.time()
   n_iter <- 0L
   for (it in seq_len(iterations)) {
+    if (expired()) break
     do_iter()
     n_iter <- n_iter + 1L
-    if (!is.null(time_budget) &&
-        as.numeric(Sys.time() - start_time, units = "secs") > time_budget) break
+
   }
   root <- get(as.character(root_id), envir = tree)
-  elapsed <- as.numeric(Sys.time() - start_time, units = "secs")
+  elapsed <- proc.time()[["elapsed"]] - start_time
   if (nrow(root$moves) == 0L) {
     return(structure(list(
       move = .mxo_empty_move_row(),

@@ -1,3 +1,10 @@
+## Maintenance update — 30 October 2026
+
+The build-state entries below describe the June snapshot. Current candidate
+verification, behavioral changes and qualification limits are in
+[MAINTENANCE.md](MAINTENANCE.md); historical CRAN-clean statements do not certify
+this unpublished candidate.
+
 # multixoR — Build State
 
 ## Stacks

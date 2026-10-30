@@ -18,7 +18,8 @@ mxo_rate_moves(
 
 \item{method}{One of \code{"search"} (negamax depth lookup), \code{"mcts"}, or
 \code{"heuristic"}. Default \code{"heuristic"} for speed; \code{"search"} and
-\code{"mcts"} are slower but stronger.}
+\code{"mcts"} cost more computation. MCTS ratings use random rollouts by default;
+pass \code{rollout = "heuristic"} to select the more expensive policy.}
 
 \item{depth}{Search depth when \code{method = "search"}. Default \code{2L}.}
 
@@ -38,6 +39,9 @@ For each legal move, evaluate the resulting position from the mover's
 perspective, attach a \code{win_prob}, derive a chess-engine-style label
 (\code{"best"} / \code{"strong"} / \code{"ok"} / \code{"weak"} / \code{"blunder"}) from the
 probability drop vs the best move, and rank the rows.
+With \code{method = "search"}, ranks use the negamax \code{score}; \code{win_prob}
+remains the one-ply heuristic estimate and \code{label} is \code{NA}, because that
+probability model has not been calibrated for search scores.
 }
 \examples{
 g <- mxo_new_game(n = 3L, k = 3L)

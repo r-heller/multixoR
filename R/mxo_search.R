@@ -122,10 +122,11 @@ mxo_search <- function(game, depth = 3L,
     cli::cli_abort("{.arg game} must be an {.cls mxo_game} object.", call = call)
   }
   branch_policy <- match.arg(branch_policy)
-  depth <- as.integer(depth)
-  if (is.na(depth) || depth < 0L) {
+  if (!is.numeric(depth) || length(depth) != 1L || !is.finite(depth) ||
+      depth < 0 || depth != floor(depth) || depth > .Machine$integer.max) {
     cli::cli_abort("{.arg depth} must be a non-negative integer.", call = call)
   }
+  depth <- as.integer(depth)
   w_args <- list(w = w, w_timeline = w_timeline,
                  terminal_score = terminal_score)
   res <- .mxo_negamax(game, depth, alpha = -Inf, beta = Inf,

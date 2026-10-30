@@ -29,7 +29,7 @@ local({
     ),
     sidebar = bslib::sidebar(
       width = 280L,
-      mxo_mod_controls_ui("controls"),
+      mxo_mod_controls_ui("controls", difficulty = difficulty),
       mxo_mod_status_ui("status")
     ),
     bslib::navset_card_tab(

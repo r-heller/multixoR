@@ -92,8 +92,11 @@ mxo_fit_calibration <- function(data, type = c("logistic", "isotonic")) {
   } else {
     ord <- order(decisive$score)
     ir <- stats::isoreg(decisive$score[ord], decisive$y[ord])
+    # isoreg already pools tied abscissae. Store each knot once so prediction
+    # does not repeatedly collapse duplicate x values with a warning.
+    distinct <- !duplicated(decisive$score[ord])
     cal <- list(type = "isotonic",
-                x = decisive$score[ord], y = ir$yf)
+                x = decisive$score[ord][distinct], y = ir$yf[distinct])
   }
   p <- .mxo_predict_calibrator(cal, decisive$score)
   cal$brier <- mean((p - decisive$y) ^ 2L)
@@ -130,6 +133,9 @@ mxo_fit_calibration <- function(data, type = c("logistic", "isotonic")) {
 .mxo_predict_calibrator <- function(cal, score) {
   if (identical(cal$type, "logistic")) {
     return(1 / (1 + exp(-(cal$a * score + cal$b))))
+  }
+  if (length(unique(cal$x)) == 1L) {
+    return(ifelse(is.na(score), NA_real_, mean(cal$y)))
   }
   pred <- stats::approx(cal$x, cal$y, xout = score, rule = 2L)$y
   pmin(pmax(pred, 0), 1)

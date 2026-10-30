@@ -30,7 +30,9 @@ evaluator) or \code{"random"} (uniform legal).}
 See \code{\link[=mxo_search]{mxo_search()}} for the trade-off.}
 
 \item{time_budget}{Optional numeric. If supplied, stops once the elapsed
-wall time exceeds this many seconds.}
+elapsed time reaches this many seconds. The budget is cooperative: it is
+checked during tree selection and rollouts, but one move-generation or
+evaluation operation may finish after the deadline.}
 
 \item{rollout_depth}{Maximum rollout depth in plies. Defaults to the
 game's \code{ply_cap}.}
@@ -50,7 +52,7 @@ exceeded) and returns a per-root-move summary.
 \examples{
 g <- mxo_new_game(n = 3L, k = 3L)
 set.seed(1)
-# Use the fast random rollout so the example terminates in milliseconds;
+# Use random rollouts here;
 # heuristic rollouts are stronger but call mxo_evaluate() per step.
 res <- mxo_mcts(g, iterations = 30L, branch_policy = "none",
                 rollout = "random")

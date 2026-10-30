@@ -14,14 +14,18 @@ mxo_ai_move(game, difficulty = c("easy", "medium", "hard"), seed = NULL, ...)
 \item \code{"easy"}   -- one-ply heuristic; takes immediate wins or blocks
 immediate opponent wins, otherwise picks the best
 heuristic move.
-\item \code{"medium"} -- negamax depth 2 with \code{branch_policy = "promising"}.
-\item \code{"hard"}   -- MCTS with 400 iterations, heuristic rollouts.
+\item \code{"medium"} -- negamax depth 2 with \code{branch_policy = "none"}.
+\item \code{"hard"}   -- MCTS with at most 400 iterations, random rollouts and a
+two-second cooperative time budget.
 }}
 
 \item{seed}{Optional integer seed for deterministic stochastic difficulty
 levels.}
 
-\item{...}{Additional arguments forwarded to the chosen engine.}
+\item{...}{Named arguments override the chosen engine defaults. For hard
+difficulty, set \code{time_budget = NULL} for a fixed iteration count and
+reproducible seeded runs independent of machine speed. A timed search can
+examine different numbers of moves on different machines.}
 }
 \value{
 A one-row legal-moves tibble (or a zero-row tibble at terminal

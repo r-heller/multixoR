@@ -70,3 +70,21 @@ test_that("the fitted default calibrator pins mxo_win_prob (B-pass-2 regression)
   expect_gt(p, 0.45)
   expect_lt(p, 0.65)
 })
+
+
+test_that("isotonic knots preserve tied-score fits without prediction warnings", {
+  data <- data.frame(score=c(0,0,1,1),outcome=c(1L,-1L,-1L,1L))
+  expect_warning(cal <- mxo_fit_calibration(data,"isotonic"),NA)
+  expect_equal(cal$x,c(0,1))
+  expect_warning(p <- mxo_calibrator_predict(cal,c(0,0.5,1)),NA)
+  expect_equal(p,rep(0.5,3))
+  reversed <- mxo_fit_calibration(data[c(2,1,3,4),],"isotonic")
+  expect_equal(mxo_calibrator_predict(reversed,c(0,0.5,1)),p)
+})
+
+test_that("a single distinct isotonic score has a constant prediction", {
+  data <- data.frame(score=rep(2,4),outcome=c(1L,1L,-1L,-1L))
+  expect_warning(cal <- mxo_fit_calibration(data,"isotonic"),NA)
+  expect_equal(mxo_calibrator_predict(cal,c(-100,2,100)),rep(0.5,3))
+  expect_true(is.na(mxo_calibrator_predict(cal,NA_real_)))
+})

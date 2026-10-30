@@ -1,6 +1,6 @@
 # Controls module: new game, undo, AI play, difficulty, mode.
 
-mxo_mod_controls_ui <- function(id) {
+mxo_mod_controls_ui <- function(id, difficulty = "medium") {
   ns <- shiny::NS(id)
   shiny::tagList(
     shiny::h4("Game"),
@@ -13,16 +13,29 @@ mxo_mod_controls_ui <- function(id) {
     shiny::selectInput(ns("mode"), "Play mode",
                        choices = c("Human vs Human" = "hvh",
                                    "Human vs AI"    = "hvai",
-                                   "AI vs AI"       = "avai"),
+                                   "AI vs AI (step with button)" = "avai"),
                        selected = "hvai"),
     shiny::selectInput(ns("difficulty"), "AI difficulty",
                        choices = c("easy", "medium", "hard"),
-                       selected = "medium")
+                       selected = difficulty),
+    shiny::hr(),
+    shiny::selectInput(ns("human_move"), "Legal move", choices = character()),
+    shiny::actionButton(ns("play_move"), "Play selected move", width = "100%"),
+    shiny::helpText("Human vs AI: you play X. AI vs AI advances one move per button press.")
   )
 }
 
 mxo_mod_controls_server <- function(id, state) {
   shiny::moduleServer(id, function(input, output, session) {
+    move_keys <- function(moves) paste(moves$kind, moves$L_src, moves$t_src,
+                                        moves$idx, sep = ":")
+    shiny::observe({
+      moves <- multixoR::mxo_legal_moves(state$game)
+      labels <- paste(moves$kind, "timeline", moves$L_src, "time", moves$t_src,
+                      "cell", moves$idx)
+      shiny::updateSelectInput(session, "human_move",
+                               choices = stats::setNames(move_keys(moves), labels))
+    })
     shiny::observeEvent(input$new_game, {
       cfg <- multixoR::mxo_config(state$game)
       state$game <- multixoR::mxo_new_game(
@@ -40,7 +53,7 @@ mxo_mod_controls_server <- function(id, state) {
     shiny::observeEvent(input$difficulty, {
       state$difficulty <- input$difficulty
     })
-    shiny::observeEvent(input$ai_move, {
+    play_ai <- function() {
       if (multixoR::mxo_is_terminal(state$game)) {
         shiny::showNotification("Game already over.", type = "warning")
         return()
@@ -59,6 +72,26 @@ mxo_mod_controls_server <- function(id, state) {
         state$game, kind = mv$kind[[1L]], L_src = mv$L_src[[1L]],
         t_src = mv$t_src[[1L]], idx = mv$idx[[1L]]
       )
+    }
+    shiny::observeEvent(input$ai_move, play_ai())
+    shiny::observeEvent(input$play_move, {
+      if (identical(input$mode, "avai")) {
+        shiny::showNotification("Use Make AI move to advance AI vs AI.")
+        return()
+      }
+      if (identical(input$mode, "hvai") && multixoR::mxo_to_move(state$game) != 1L) {
+        shiny::showNotification("It is O's turn; use Make AI move.")
+        return()
+      }
+      moves <- multixoR::mxo_legal_moves(state$game)
+      i <- match(input$human_move, move_keys(moves))
+      if (length(i) != 1L || is.na(i)) {
+        shiny::showNotification("Select a current legal move.", type = "warning")
+        return()
+      }
+      m <- moves[i, , drop = FALSE]
+      state$game <- multixoR::mxo_move(state$game, m$kind, m$L_src, m$t_src, m$idx)
+      if (identical(input$mode, "hvai") && !multixoR::mxo_is_terminal(state$game)) play_ai()
     })
   })
 }

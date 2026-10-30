@@ -24,7 +24,7 @@
 mxo_run_app <- function(game = NULL, difficulty = c("medium", "easy", "hard"),
                         ...) {
   call <- rlang::current_env()
-  needed <- c("shiny", "bslib", "DT")
+  needed <- c("shiny", "bslib", "DT", "plotly")
   missing <- needed[!vapply(needed, requireNamespace, logical(1L),
                             quietly = TRUE)]
   if (length(missing) > 0L) {
