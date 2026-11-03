@@ -3,7 +3,10 @@
 For each legal move, evaluate the resulting position from the mover's
 perspective, attach a `win_prob`, derive a chess-engine-style label
 (`"best"` / `"strong"` / `"ok"` / `"weak"` / `"blunder"`) from the
-probability drop vs the best move, and rank the rows.
+probability drop vs the best move, and rank the rows. With
+`method = "search"`, ranks use the negamax `score`; `win_prob` remains
+the one-ply heuristic estimate and `label` is `NA`, because that
+probability model has not been calibrated for search scores.
 
 ## Usage
 
@@ -27,8 +30,9 @@ mxo_rate_moves(
 - method:
 
   One of `"search"` (negamax depth lookup), `"mcts"`, or `"heuristic"`.
-  Default `"heuristic"` for speed; `"search"` and `"mcts"` are slower
-  but stronger.
+  Default `"heuristic"` for speed; `"search"` and `"mcts"` cost more
+  computation. MCTS ratings use random rollouts by default; pass
+  `rollout = "heuristic"` to select the more expensive policy.
 
 - depth:
 

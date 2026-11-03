@@ -21,9 +21,10 @@ mxo_ai_move(game, difficulty = c("easy", "medium", "hard"), seed = NULL, ...)
   - `"easy"` – one-ply heuristic; takes immediate wins or blocks
     immediate opponent wins, otherwise picks the best heuristic move.
 
-  - `"medium"` – negamax depth 2 with `branch_policy = "promising"`.
+  - `"medium"` – negamax depth 2 with `branch_policy = "none"`.
 
-  - `"hard"` – MCTS with 400 iterations, heuristic rollouts.
+  - `"hard"` – MCTS with at most 400 iterations, random rollouts and a
+    two-second cooperative time budget.
 
 - seed:
 
@@ -31,7 +32,10 @@ mxo_ai_move(game, difficulty = c("easy", "medium", "hard"), seed = NULL, ...)
 
 - ...:
 
-  Additional arguments forwarded to the chosen engine.
+  Named arguments override the chosen engine defaults. For hard
+  difficulty, set `time_budget = NULL` for a fixed iteration count and
+  reproducible seeded runs independent of machine speed. A timed search
+  can examine different numbers of moves on different machines.
 
 ## Value
 

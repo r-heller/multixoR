@@ -30,7 +30,8 @@
 
     <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
 
-    <a class="navbar-brand me-2" href="index.html"><img src="logo.png" alt="" class="themakr-navbar-logo">multixoR</a>
+    <!-- Standard logo aliases contain the named v5 light and dark hexes. -->
+    <a class="navbar-brand me-2" href="index.html"><img src="logo.png" alt="" class="themakr-navbar-logo" data-cttir-dark-src="reference/figures/logo-dark.svg">multixoR</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
@@ -102,7 +103,7 @@
 
 
   </div>
-</nav><div class="container template-home">
+</nav><script src="themakr-brand.js" defer></script><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
@@ -125,6 +126,7 @@
 <div class="section level2">
 <h2 id="install">Install<a class="anchor" aria-label="anchor" href="#install"></a>
 </h2>
+<p>Requires R &gt;= 4.1.0 and the dependencies in <code>DESCRIPTION</code>. To install this reviewed checkout, use <code>R CMD INSTALL .</code>; the command below installs GitHub main.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-heller/multixoR"</span><span class="op">)</span></span></code></pre></div>
@@ -149,7 +151,8 @@
 <span><span class="fu"><a href="reference/mxo_search.html">mxo_search</a></span><span class="op">(</span><span class="va">g</span>, depth <span class="op">=</span> <span class="fl">1L</span>, branch_policy <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span><span class="op">$</span><span class="va">move</span></span>
 <span><span class="fu"><a href="reference/mxo_win_prob.html">mxo_win_prob</a></span><span class="op">(</span><span class="va">g</span>, method <span class="op">=</span> <span class="st">"heuristic"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/mxo_rate_moves.html">mxo_rate_moves</a></span><span class="op">(</span><span class="va">g</span>, method <span class="op">=</span> <span class="st">"heuristic"</span><span class="op">)</span>        <span class="co"># type-stable table</span></span>
-<span><span class="fu"><a href="reference/mxo_ai_move.html">mxo_ai_move</a></span><span class="op">(</span><span class="va">g</span>, difficulty <span class="op">=</span> <span class="st">"medium"</span>, seed <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/mxo_ai_move.html">mxo_ai_move</a></span><span class="op">(</span><span class="va">g</span>, difficulty <span class="op">=</span> <span class="st">"hard"</span>, seed <span class="op">=</span> <span class="fl">1L</span><span class="op">)</span> <span class="co"># cooperative two-second budget</span></span></code></pre></div>
+<p>Hard difficulty checks its budget between search operations; one operation can finish after the deadline. For fixed-work reproducibility, pass <code>time_budget = NULL</code>, a seed and explicit <code>iterations</code>/<code>rollout_depth</code> limits. MCTS move ratings use random rollouts by default. Search ratings rank negamax scores; their <code>win_prob</code> column remains a one-ply heuristic estimate and <code>label</code> is <code>NA</code>, since search scores do not have a validated probability calibration. The shipped calibrator is based on small-board self-play, not a guarantee of outcomes against people or across all board configurations.</p>
 <p>Simulate self-play and analyse:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sim</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mxo_simulate.html">mxo_simulate</a></span><span class="op">(</span></span>
@@ -172,6 +175,7 @@
 <p>Launch the Shiny app (<code>shiny</code>, <code>bslib</code>, <code>DT</code> are <code>Suggests</code>):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/mxo_run_app.html">mxo_run_app</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Choose a current <strong>Legal move</strong>, then <strong>Play selected move</strong>. Human vs AI uses X for the human and replies as O. AI vs AI advances through <strong>Make AI move</strong>; plots display the game, while moves are selected through the controls.</p>
 </div>
 <div class="section level2">
 <h2 id="design-highlights">Design highlights<a class="anchor" aria-label="anchor" href="#design-highlights"></a>
@@ -255,7 +259,7 @@ pipeline/           # the build orchestrator and the rules spec</code></pre>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

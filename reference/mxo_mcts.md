@@ -46,8 +46,10 @@ mxo_mcts(
 
 - time_budget:
 
-  Optional numeric. If supplied, stops once the elapsed wall time
-  exceeds this many seconds.
+  Optional numeric. If supplied, stops once the elapsed elapsed time
+  reaches this many seconds. The budget is cooperative: it is checked
+  during tree selection and rollouts, but one move-generation or
+  evaluation operation may finish after the deadline.
 
 - rollout_depth:
 
@@ -71,7 +73,7 @@ An object of class `mxo_mcts_result`.
 ``` r
 g <- mxo_new_game(n = 3L, k = 3L)
 set.seed(1)
-# Use the fast random rollout so the example terminates in milliseconds;
+# Use random rollouts here;
 # heuristic rollouts are stronger but call mxo_evaluate() per step.
 res <- mxo_mcts(g, iterations = 30L, branch_policy = "none",
                 rollout = "random")

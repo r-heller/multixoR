@@ -23,6 +23,10 @@ The full spec lives in
 
 ## Install
 
+Requires R \>= 4.1.0 and the dependencies in `DESCRIPTION`. To install
+this reviewed checkout, use `R CMD INSTALL .`; the command below
+installs GitHub main.
+
 ``` r
 
 # install.packages("remotes")
@@ -53,8 +57,19 @@ mxo_evaluate(g)                                # heuristic score
 mxo_search(g, depth = 1L, branch_policy = "none")$move
 mxo_win_prob(g, method = "heuristic")
 mxo_rate_moves(g, method = "heuristic")        # type-stable table
-mxo_ai_move(g, difficulty = "medium", seed = 1L)
+mxo_ai_move(g, difficulty = "hard", seed = 1L) # cooperative two-second budget
 ```
+
+Hard difficulty checks its budget between search operations; one
+operation can finish after the deadline. For fixed-work reproducibility,
+pass `time_budget = NULL`, a seed and explicit
+`iterations`/`rollout_depth` limits. MCTS move ratings use random
+rollouts by default. Search ratings rank negamax scores; their
+`win_prob` column remains a one-ply heuristic estimate and `label` is
+`NA`, since search scores do not have a validated probability
+calibration. The shipped calibrator is based on small-board self-play,
+not a guarantee of outcomes against people or across all board
+configurations.
 
 Simulate self-play and analyse:
 
@@ -89,6 +104,11 @@ Launch the Shiny app (`shiny`, `bslib`, `DT` are `Suggests`):
 
 mxo_run_app()
 ```
+
+Choose a current **Legal move**, then **Play selected move**. Human vs
+AI uses X for the human and replies as O. AI vs AI advances through
+**Make AI move**; plots display the game, while moves are selected
+through the controls.
 
 ## Design highlights
 

@@ -5,7 +5,8 @@
 
     <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
 
-    <a class="navbar-brand me-2" href="../index.html"><img src="../logo.png" alt="" class="themakr-navbar-logo">multixoR</a>
+    <!-- Standard logo aliases contain the named v5 light and dark hexes. -->
+    <a class="navbar-brand me-2" href="../index.html"><img src="../logo.png" alt="" class="themakr-navbar-logo" data-cttir-dark-src="../reference/figures/logo-dark.svg">multixoR</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
@@ -64,7 +65,7 @@
 
 
   </div>
-</nav><div class="container template-reference-topic">
+</nav><script src="../themakr-brand.js" defer></script><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Choose a move using a packaged difficulty knob</h1>
@@ -93,8 +94,9 @@
 <dd><p>One of <code>"easy"</code>, <code>"medium"</code>, or <code>"hard"</code>. The mapping is:</p><ul><li><p><code>"easy"</code>   – one-ply heuristic; takes immediate wins or blocks
 immediate opponent wins, otherwise picks the best
 heuristic move.</p></li>
-<li><p><code>"medium"</code> – negamax depth 2 with <code>branch_policy = "promising"</code>.</p></li>
-<li><p><code>"hard"</code>   – MCTS with 400 iterations, heuristic rollouts.</p></li>
+<li><p><code>"medium"</code> – negamax depth 2 with <code>branch_policy = "none"</code>.</p></li>
+<li><p><code>"hard"</code>   – MCTS with at most 400 iterations, random rollouts and a
+two-second cooperative time budget.</p></li>
 </ul></dd>
 
 
@@ -104,7 +106,10 @@ levels.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments forwarded to the chosen engine.</p></dd>
+<dd><p>Named arguments override the chosen engine defaults. For hard
+difficulty, set <code>time_budget = NULL</code> for a fixed iteration count and
+reproducible seeded runs independent of machine speed. A timed search can
+examine different numbers of moves on different machines.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -136,7 +141,7 @@ states).</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

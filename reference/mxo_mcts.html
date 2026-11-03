@@ -7,7 +7,8 @@ exceeded) and returns a per-root-move summary."><meta property="og:image" conten
 
     <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
 
-    <a class="navbar-brand me-2" href="../index.html"><img src="../logo.png" alt="" class="themakr-navbar-logo">multixoR</a>
+    <!-- Standard logo aliases contain the named v5 light and dark hexes. -->
+    <a class="navbar-brand me-2" href="../index.html"><img src="../logo.png" alt="" class="themakr-navbar-logo" data-cttir-dark-src="../reference/figures/logo-dark.svg">multixoR</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
@@ -66,7 +67,7 @@ exceeded) and returns a per-root-move summary."><meta property="og:image" conten
 
 
   </div>
-</nav><div class="container template-reference-topic">
+</nav><script src="../themakr-brand.js" defer></script><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Light UCT Monte-Carlo Tree Search</h1>
@@ -122,7 +123,9 @@ See <code><a href="mxo_search.html">mxo_search()</a></code> for the trade-off.</
 
 <dt id="arg-time-budget">time_budget<a class="anchor" aria-label="anchor" href="#arg-time-budget"></a></dt>
 <dd><p>Optional numeric. If supplied, stops once the elapsed
-wall time exceeds this many seconds.</p></dd>
+elapsed time reaches this many seconds. The budget is cooperative: it is
+checked during tree selection and rollouts, but one move-generation or
+evaluation operation may finish after the deadline.</p></dd>
 
 
 <dt id="arg-rollout-depth">rollout_depth<a class="anchor" aria-label="anchor" href="#arg-rollout-depth"></a></dt>
@@ -148,7 +151,7 @@ rollout. Default <code>0.7</code>.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="mxo_new_game.html">mxo_new_game</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3L</span>, k <span class="op">=</span> <span class="fl">3L</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Use the fast random rollout so the example terminates in milliseconds;</span></span></span>
+<span class="r-in"><span><span class="co"># Use random rollouts here;</span></span></span>
 <span class="r-in"><span><span class="co"># heuristic rollouts are stronger but call mxo_evaluate() per step.</span></span></span>
 <span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">mxo_mcts</span><span class="op">(</span><span class="va">g</span>, iterations <span class="op">=</span> <span class="fl">30L</span>, branch_policy <span class="op">=</span> <span class="st">"none"</span>,</span></span>
 <span class="r-in"><span>                rollout <span class="op">=</span> <span class="st">"random"</span><span class="op">)</span></span></span>
@@ -172,7 +175,7 @@ rollout. Default <code>0.7</code>.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>
