@@ -1,4 +1,4 @@
-# multixoR
+# multixoR ![multixoR logo](reference/figures/logo.png)
 
 > Five-dimensional, multiverse tic-tac-toe in R. A pure-R engine,
 > incremental cross-axis win detection, evaluation + MCTS, batch
