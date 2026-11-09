@@ -1,5 +1,4 @@
-# multixoR <a href="https://r-heller.github.io/multixoR/"><img src="man/figures/logo.png" align="right" height="139" alt="multixoR logo" /></a>
-
+# multixoR <picture class="cttir-readme-logo"><source class="cttir-logo-dark-source" media="(prefers-color-scheme: dark)" srcset="man/figures/logo-dark.png" /><img src="man/figures/logo.png" align="right" alt="multixoR logo" width="120" height="139" /></picture>
 > Five-dimensional, multiverse tic-tac-toe in R. A pure-R engine,
 > incremental cross-axis win detection, evaluation + MCTS, batch self-play,
 > calibration, ggplot2/plotly visualisation, and a bundled Shiny app.
