@@ -89,7 +89,7 @@ mcts <- mxo_mcts(
 mcts
 #> 
 #> ── MCTS result ─────────────────────────────────────────────────────────────────
-#> ℹ Iterations: 40 (elapsed 6.43s)
+#> ℹ Iterations: 40 (elapsed 8.06s)
 #> → present L0 t0 idx0: N=2, Q=1
 #> → present L0 t0 idx1: N=2, Q=0
 #> → present L0 t0 idx3: N=2, Q=1
