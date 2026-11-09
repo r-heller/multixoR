@@ -5,6 +5,10 @@ home:
   description: Five-dimensional, multiverse tic-tac-toe in R.
 
 template:
+  includes:
+    in_header: |
+      <meta name="theme-color" content="#1565c0">
+      <script defer data-domain="r-heller.github.io/multixor" src="https://analytics.hellebo.de/js/script.file-downloads.outbound-links.js"></script>
   package: themakR
   bootstrap: 5
   bslib:
