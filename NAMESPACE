@@ -62,8 +62,12 @@ export(mxo_undo)
 export(mxo_win_prob)
 export(mxo_win_prob_curve)
 importFrom(ggplot2,autoplot)
-importFrom(rlang,"%||%")
-importFrom(rlang,.data)
+importFrom(rlang,
+  "%||%",
+  .data
+)
 importFrom(stats,setNames)
-importFrom(utils,head)
-importFrom(utils,tail)
+importFrom(utils,
+  head,
+  tail
+)

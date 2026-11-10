@@ -1,4 +1,16 @@
-# multixoR development
+# multixoR 0.2.0
+
+## CRAN preparation
+
+* Maintainer address changed to raban.heller@uni-ulm.de.
+* `.Rbuildignore` covers the development folders, so the source package no
+  longer contains an empty `tools/` directory; README links to the rules
+  specification on GitHub.
+* Added spelling `WORDLIST` entries and updated `cran-comments.md`.
+* The three slowest tests (opening tables and an isotonic calibration fit,
+  about two minutes together) are skipped on CRAN.
+
+## Bug fixes and improvements
 
 * Make human play functional in the Shiny controls, honor initial difficulty,
   add AI replies and explicit AI stepping, and check the required plotly dependency.

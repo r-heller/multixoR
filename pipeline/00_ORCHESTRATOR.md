@@ -25,7 +25,7 @@ Package identity (do not hardcode elsewhere — this is the declaration):
 - **Prefix:** `mxo_`
 - **Org/repo:** `r-heller/multixoR`
 - **pkgdown:** `https://r-heller.github.io/multixoR/`
-- **Author:** Raban Heller `<raban.heller@charite.de>`, ORCID `0000-0001-8006-9742`
+- **Author:** Raban Heller `<raban.heller@uni-ulm.de>`, ORCID `0000-0001-8006-9742`
 - **License:** MIT + file LICENSE
 - **S3 throughout; all plot fns return ggplot2/plotly objects; cli + rlang for
   messaging; vapply over sapply; TRUE/FALSE not T/F; no library()/require() in
@@ -221,7 +221,7 @@ git identity is set (these are the user's to confirm locally; if unset, STOP and
 ask the user to set them — do not invent values):
 ```
 git config user.name  "Raban Heller"
-git config user.email "raban.heller@charite.de"
+git config user.email "raban.heller@uni-ulm.de"
 ```
 Hard rules:
 - **No** `Co-Authored-By: Claude ...` trailer in any commit message.

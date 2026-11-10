@@ -33,6 +33,7 @@ test_that("calibrator predict returns probabilities in [0, 1]", {
 })
 
 test_that("isotonic fit also returns a valid calibrator", {
+  skip_on_cran() # about 9 s: simulates 30 calibration games
   data <- mxo_make_calibration_data(
     n_games = 30L,
     policy_x = mxo_policy("random", branch_policy = "all"),

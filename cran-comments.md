@@ -1,26 +1,36 @@
-# cran-comments
-
 ## R CMD check results
 
-* `R CMD check --as-cran` is clean on the maintainer machine (R 4.6.0,
-  macOS): 0 errors | 0 warnings | 0 notes.
-* The package is also exercised by the GitHub Actions workflows
-  `R-CMD-check.yaml` (macOS / Windows / Ubuntu × release + devel +
-  oldrel-1) and `pkgdown.yaml`.
+0 errors | 0 warnings | 1 note
 
-## Notes for the CRAN team
+* checking CRAN incoming feasibility ... NOTE
+  Maintainer: 'Raban Heller <raban.heller@uni-ulm.de>'
+  New submission
 
-* New submission — first time on CRAN. (A "New submission" note is
-  expected and acceptable.)
+  This is the first submission of multixoR to CRAN.
+
+## Test environments
+
+* local: macOS (aarch64), R 4.6.1, `R CMD check --as-cran --no-manual`
+  (no LaTeX installation locally, so the PDF manual was not built)
+* GitHub Actions (r-lib/actions v2):
+  * macos-latest (R release)
+  * windows-latest (R release)
+  * ubuntu-latest (R devel, R release, R oldrel-1)
+
+## Notes for the reviewer
+
 * The package ships a small fitted calibrator as internal package data
-  (`R/sysdata.rda`, ~500 bytes). It is produced reproducibly by
+  (`R/sysdata.rda`, about 500 bytes). It is produced reproducibly by
   `data-raw/make_calibrator.R`; no external network resource is used.
-* Examples that are wall-time-bound (MCTS in pure R) are guarded by
-  `\donttest{}` so CHECK does not run them.
-* The bundled Shiny app's launcher (`mxo_run_app()`) has all of `shiny`,
-  `bslib`, `DT` in `Suggests` and surfaces a `cli` error with install
-  instructions if any are missing.
+* The AI (heuristic search and Monte Carlo tree search) is pure R. Examples
+  use small search budgets and finish in about a second each; the slowest
+  tests are skipped on CRAN.
+* The bundled Shiny app's launcher (`mxo_run_app()`) needs 'shiny', 'bslib'
+  and 'DT' from Suggests and raises an informative error if any is missing;
+  its example runs only in interactive sessions.
 
 ## Downstream dependencies
 
 There are currently no reverse dependencies.
+
+## This is a new submission.

@@ -1,4 +1,5 @@
 test_that("opening_table covers all spatial start cells", {
+  skip_on_cran() # about 90 s: plays two games from each of 27 start cells
   cfg <- mxo_config_default(n = 3L, k = 3L, ply_cap = 6L)
   tab <- mxo_opening_table(
     opponent = mxo_policy("random"),

@@ -10,7 +10,7 @@
 ^STATE\.md$
 ^README\.Rmd$
 ^cran-comments\.md$
-^_pkgdown\.yml$
+^_pkgdown\.ya?ml$
 ^codecov\.yml$
 ^_coverage$
 ^docs$
@@ -21,6 +21,11 @@
 ^HANDOFF\.md$
 ^vignettes/articles$
 ^MAINTENANCE\.md$
-
-^tools/branding$
-^tools/draw-logo\.R$
+^ROADMAP\.md$
+^VALIDATION\.md$
+^CITATION\.cff$
+^codemeta\.json$
+^\.zenodo\.json$
+^tools$
+^revdep$
+^man/figures/logo-dark\.svg$

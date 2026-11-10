@@ -26,6 +26,7 @@ test_that("plot_eval renders the heuristic curve", {
 })
 
 test_that("plot_opening accepts an opening_table from C", {
+  skip_on_cran() # about 20 s: builds a full opening table
   tab <- mxo_opening_table(
     opponent = mxo_policy("random"),
     n_games_per_cell = 1L,
