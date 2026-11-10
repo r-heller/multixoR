@@ -8,7 +8,7 @@
     <!-- Standard logo aliases contain the named v5 light and dark hexes. -->
     <a class="navbar-brand me-2" href="../index.html"><img src="../logo.svg" alt="" class="themakr-navbar-logo" data-cttir-dark-src="../reference/figures/logo-dark.svg">multixoR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,6 +72,25 @@
       <small>Source: <a href="https://github.com/r-heller/multixoR/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.0" id="multixor-020">multixoR 0.2.0<a class="anchor" aria-label="anchor" href="#multixor-020"></a></h2>
+<div class="section level3">
+<h3 id="cran-preparation-0-2-0">CRAN preparation<a class="anchor" aria-label="anchor" href="#cran-preparation-0-2-0"></a></h3>
+<ul><li>Maintainer address changed to <a href="mailto:raban.heller@uni-ulm.de" class="email">raban.heller@uni-ulm.de</a>.</li>
+<li>
+<code>.Rbuildignore</code> covers the development folders, so the source package no longer contains an empty <code>tools/</code> directory; README links to the rules specification on GitHub.</li>
+<li>Added spelling <code>WORDLIST</code> entries and updated <code>cran-comments.md</code>.</li>
+<li>The three slowest tests (opening tables and an isotonic calibration fit, about two minutes together) are skipped on CRAN.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-and-improvements-0-2-0">Bug fixes and improvements<a class="anchor" aria-label="anchor" href="#bug-fixes-and-improvements-0-2-0"></a></h3>
+<ul><li><p>Make human play functional in the Shiny controls, honor initial difficulty, add AI replies and explicit AI stepping, and check the required plotly dependency.</p></li>
+<li><p>Forward named AI/rating engine arguments, including explicit <code>NULL</code> budgets.</p></li>
+<li><p>Bound hard AI with cooperative deadline checks through tree traversal and rollouts; use random rollouts for MCTS move ratings by default.</p></li>
+<li><p>Rank search ratings by search value and leave unsupported probability labels missing. Reject invalid or fractional search depths before conversion.</p></li>
+<li><p>Store distinct isotonic knots and handle constant-score calibration data.</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="multixor-010">multixoR 0.1.0<a class="anchor" aria-label="anchor" href="#multixor-010"></a></h2>
 <p>Initial release.</p>

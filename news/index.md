@@ -1,5 +1,36 @@
 # Changelog
 
+## multixoR 0.2.0
+
+### CRAN preparation
+
+- Maintainer address changed to <raban.heller@uni-ulm.de>.
+- `.Rbuildignore` covers the development folders, so the source package
+  no longer contains an empty `tools/` directory; README links to the
+  rules specification on GitHub.
+- Added spelling `WORDLIST` entries and updated `cran-comments.md`.
+- The three slowest tests (opening tables and an isotonic calibration
+  fit, about two minutes together) are skipped on CRAN.
+
+### Bug fixes and improvements
+
+- Make human play functional in the Shiny controls, honor initial
+  difficulty, add AI replies and explicit AI stepping, and check the
+  required plotly dependency.
+
+- Forward named AI/rating engine arguments, including explicit `NULL`
+  budgets.
+
+- Bound hard AI with cooperative deadline checks through tree traversal
+  and rollouts; use random rollouts for MCTS move ratings by default.
+
+- Rank search ratings by search value and leave unsupported probability
+  labels missing. Reject invalid or fractional search depths before
+  conversion.
+
+- Store distinct isotonic knots and handle constant-score calibration
+  data.
+
 ## multixoR 0.1.0
 
 Initial release.

@@ -19,7 +19,7 @@ doing so spawns a **new branching timeline** from that point, leaving
 the original timeline untouched. Branching is unrestricted.
 
 The full spec lives in
-[`pipeline/multixoR_GAME_RULES.md`](https://r-heller.github.io/multixoR/pipeline/multixoR_GAME_RULES.md).
+[`pipeline/multixoR_GAME_RULES.md`](https://github.com/r-heller/multixoR/blob/main/pipeline/multixoR_GAME_RULES.md).
 
 ## Install
 
