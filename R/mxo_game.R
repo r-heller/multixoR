@@ -56,7 +56,9 @@ validate_mxo_game <- function(x, call = rlang::caller_env()) {
   board_size <- as.integer(n ^ d_spatial)
   keys <- names(x$boards)
   if (any(duplicated(keys))) {
-    cli::cli_abort("Duplicate board key{?s} detected.", call = call)
+    dup <- unique(keys[duplicated(keys)])
+    cli::cli_abort("Duplicate board key{?s} detected: {.val {dup}}.",
+                   call = call)
   }
   for (key in keys) {
     b <- x$boards[[key]]
