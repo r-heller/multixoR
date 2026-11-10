@@ -21,3 +21,14 @@ mxo_policy_move(policy, game)
 ## Value
 
 A one-row legal-moves tibble (or zero-row at terminal states).
+
+## Examples
+
+``` r
+set.seed(1)
+mxo_policy_move(mxo_policy("random"), mxo_new_game(n = 3L))
+#> # A tibble: 1 × 5
+#>   kind    L_src t_src   idx player
+#>   <chr>   <int> <int> <int>  <int>
+#> 1 present     0     0    24      1
+```

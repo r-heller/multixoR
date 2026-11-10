@@ -41,3 +41,16 @@ mxo_make_calibration_data(
 
 A tibble with columns `score` (dbl, mover-perspective evaluation) and
 `outcome` (int, in `{-1, 0, 1}` for mover-loss / draw / mover-win).
+
+## Examples
+
+``` r
+cd <- mxo_make_calibration_data(
+  n_games = 3L, config = mxo_config_default(n = 3L, ply_cap = 12L),
+  seed = 1L
+)
+table(cd$outcome)
+#> 
+#> -1  0  1 
+#>  5 24  5 
+```

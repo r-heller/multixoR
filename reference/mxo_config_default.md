@@ -24,3 +24,24 @@ mxo_config_default(
 ## Value
 
 A configuration list.
+
+## Examples
+
+``` r
+mxo_config_default(n = 3L, ply_cap = 8L)
+#> $n
+#> [1] 3
+#> 
+#> $d_spatial
+#> [1] 3
+#> 
+#> $k
+#> [1] 3
+#> 
+#> $ply_cap
+#> [1] 8
+#> 
+#> $max_timelines
+#> [1] 32
+#> 
+```

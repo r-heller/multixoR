@@ -24,3 +24,25 @@ mxo_fit_calibration(data, type = c("logistic", "isotonic"))
 ## Value
 
 An object of class `mxo_calibrator`.
+
+## Examples
+
+``` r
+cd <- mxo_make_calibration_data(
+  n_games = 3L, config = mxo_config_default(n = 3L, ply_cap = 12L),
+  seed = 1L
+)
+mxo_fit_calibration(cd)
+#> 
+#> ── mxo_calibrator ──────────────────────────────────────────────────────────────
+#> ℹ Type: logistic
+#> ℹ a = 7e-06, b = 0.222999
+#> ℹ n decisive plies: 10
+#> ℹ Brier: 0.2226 (baseline 0.25)
+mxo_fit_calibration(cd, type = "isotonic")
+#> 
+#> ── mxo_calibrator ──────────────────────────────────────────────────────────────
+#> ℹ Type: isotonic
+#> ℹ n decisive plies: 10
+#> ℹ Brier: 0.2222 (baseline 0.25)
+```

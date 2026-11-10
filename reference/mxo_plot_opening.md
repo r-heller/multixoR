@@ -28,3 +28,12 @@ mxo_plot_opening(opening_table, n = 4L, d_spatial = 3L, ...)
 ## Value
 
 A `ggplot` object.
+
+## Examples
+
+``` r
+ot <- mxo_opening_table(n_games_per_cell = 1L,
+                        config = mxo_config_default(n = 3L, ply_cap = 2L),
+                        seed = 1L)
+mxo_plot_opening(ot, n = 3L)
+```

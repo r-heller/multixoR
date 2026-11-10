@@ -17,3 +17,12 @@ is_mxo_policy(x)
 ## Value
 
 Logical scalar.
+
+## Examples
+
+``` r
+is_mxo_policy(mxo_policy("random"))
+#> [1] TRUE
+is_mxo_policy(list())
+#> [1] FALSE
+```

@@ -37,3 +37,25 @@ mxo_opening_table(
 
 A tibble with columns `idx` (int), `x_win_rate`, `o_win_rate`,
 `draw_rate`, `n_games`.
+
+## Examples
+
+``` r
+# A tiny two-dimensional board keeps the example fast.
+mxo_opening_table(n_games_per_cell = 1L,
+                  config = mxo_config_default(n = 3L, d_spatial = 2L,
+                                              ply_cap = 4L),
+                  seed = 1L)
+#> # A tibble: 9 × 5
+#>     idx x_win_rate o_win_rate draw_rate n_games
+#>   <int>      <dbl>      <dbl>     <dbl>   <int>
+#> 1     0          0          0         1       1
+#> 2     1          0          0         1       1
+#> 3     2          0          0         1       1
+#> 4     3          0          0         1       1
+#> 5     4          0          0         1       1
+#> 6     5          0          0         1       1
+#> 7     6          0          0         1       1
+#> 8     7          0          0         1       1
+#> 9     8          0          0         1       1
+```

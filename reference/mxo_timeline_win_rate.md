@@ -40,3 +40,17 @@ mxo_timeline_win_rate(
 
 A tibble with columns `n_games`, `n_wins`, `cross_timeline_wins`,
 `cross_timeline_fraction`, plus a counts-by-axis-class breakdown.
+
+## Examples
+
+``` r
+mxo_timeline_win_rate(mxo_policy("random"), mxo_policy("random"),
+                      n_games = 4L,
+                      config = mxo_config_default(n = 3L, ply_cap = 8L),
+                      seed = 1L)
+#> # A tibble: 1 × 8
+#>   n_games n_wins cross_timeline_wins cross_timeline_fraction spatial  time
+#>     <int>  <int>               <int>                   <dbl>   <int> <int>
+#> 1       4      0                   0                      NA       0     0
+#> # ℹ 2 more variables: timeline <int>, mixed <int>
+```

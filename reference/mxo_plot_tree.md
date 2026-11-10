@@ -23,3 +23,9 @@ mxo_plot_tree(game, ...)
 ## Value
 
 A `ggplot` object.
+
+## Examples
+
+``` r
+mxo_plot_tree(mxo_example_game())
+```
