@@ -2,9 +2,9 @@ Package: multixoR
 Title: Five-Dimensional Multiverse Tic-Tac-Toe
 Version: 0.2.0
 Authors@R:
-    person(given = "Raban",
+    person(given = "R.",
            family = "Heller",
-           role = c("aut", "cre"),
+           role = c("aut", "cre", "cph"),
            email = "raban.heller@uni-ulm.de",
            comment = c(ORCID = "0000-0001-8006-9742"))
 Description: A five-dimensional, multiverse variant of tic-tac-toe. Two
