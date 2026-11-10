@@ -10,6 +10,8 @@
 #' @param ... Unused. Reserved for future arguments.
 #' @return A `ggplot` object.
 #' @export
+#' @examples
+#' mxo_plot_tree(mxo_example_game())
 mxo_plot_tree <- function(game, ...) {
   rlang::check_dots_empty()
   if (!is_mxo_game(game)) {

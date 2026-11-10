@@ -15,3 +15,7 @@ Logical scalar.
 \description{
 Test whether an object is a multixoR policy
 }
+\examples{
+is_mxo_policy(mxo_policy("random"))
+is_mxo_policy(list())
+}

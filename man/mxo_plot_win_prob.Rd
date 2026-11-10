@@ -19,3 +19,9 @@ Accepts either a tibble (as produced by \code{\link[=mxo_win_prob_curve]{mxo_win
 columns \code{ply}, \code{player}, \code{win_prob}) or an \code{mxo_game_record} from
 \code{\link[=mxo_self_play]{mxo_self_play()}}.
 }
+\examples{
+rec <- mxo_self_play(mxo_policy("random"), mxo_policy("random"),
+                     config = mxo_config_default(n = 3L, ply_cap = 8L),
+                     seed = 1L)
+mxo_plot_win_prob(rec)
+}

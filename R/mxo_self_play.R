@@ -7,6 +7,8 @@
 #'   [mxo_new_game()].
 #' @return A configuration list.
 #' @export
+#' @examples
+#' mxo_config_default(n = 3L, ply_cap = 8L)
 mxo_config_default <- function(n = 4L, d_spatial = 3L, k = 3L,
                                ply_cap = 60L, max_timelines = 32L) {
   list(n = as.integer(n), d_spatial = as.integer(d_spatial),
@@ -125,6 +127,11 @@ print.mxo_game_record <- function(x, ...) {
 #' @param ... Unused.
 #' @return A tibble with one row per ply.
 #' @export
+#' @examples
+#' rec <- mxo_self_play(mxo_policy("random"), mxo_policy("random"),
+#'                      config = mxo_config_default(n = 3L, ply_cap = 8L),
+#'                      seed = 1L)
+#' as_tibble.mxo_game_record(rec)
 as_tibble.mxo_game_record <- function(x, ...) {
   rlang::check_dots_empty()
   h <- x$history

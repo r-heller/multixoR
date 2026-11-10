@@ -21,6 +21,12 @@
 #' @return A tibble with columns `score` (dbl, mover-perspective evaluation)
 #'   and `outcome` (int, in `{-1, 0, 1}` for mover-loss / draw / mover-win).
 #' @export
+#' @examples
+#' cd <- mxo_make_calibration_data(
+#'   n_games = 3L, config = mxo_config_default(n = 3L, ply_cap = 12L),
+#'   seed = 1L
+#' )
+#' table(cd$outcome)
 mxo_make_calibration_data <- function(n_games = 100L,
                                       policy_x = mxo_policy("random"),
                                       policy_o = mxo_policy("random"),
@@ -59,6 +65,13 @@ mxo_make_calibration_data <- function(n_games = 100L,
 #' @param type One of `"logistic"` (default) or `"isotonic"`.
 #' @return An object of class `mxo_calibrator`.
 #' @export
+#' @examples
+#' cd <- mxo_make_calibration_data(
+#'   n_games = 3L, config = mxo_config_default(n = 3L, ply_cap = 12L),
+#'   seed = 1L
+#' )
+#' mxo_fit_calibration(cd)
+#' mxo_fit_calibration(cd, type = "isotonic")
 mxo_fit_calibration <- function(data, type = c("logistic", "isotonic")) {
   call <- rlang::current_env()
   type <- match.arg(type)
@@ -147,6 +160,11 @@ mxo_fit_calibration <- function(data, type = c("logistic", "isotonic")) {
 #' @param score Numeric vector of heuristic scores.
 #' @return Numeric vector of probabilities in `[0, 1]`.
 #' @export
+#' @examples
+#' cd <- tibble::tibble(score = c(-30, -10, -5, 0, 5, 10, 30, 40),
+#'                      outcome = c(-1L, -1L, 1L, 0L, -1L, 1L, 1L, 1L))
+#' cal <- mxo_fit_calibration(cd)
+#' mxo_calibrator_predict(cal, c(-20, 0, 20))
 mxo_calibrator_predict <- function(calibrator, score) {
   call <- rlang::current_env()
   if (!inherits(calibrator, "mxo_calibrator")) {

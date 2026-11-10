@@ -19,3 +19,11 @@ Maps the heuristic evaluation score to a \verb{[0, 1]} win probability for the
 player-to-move. Logistic and isotonic fits are supported; both produce
 compact, serialisable \code{mxo_calibrator} objects.
 }
+\examples{
+cd <- mxo_make_calibration_data(
+  n_games = 3L, config = mxo_config_default(n = 3L, ply_cap = 12L),
+  seed = 1L
+)
+mxo_fit_calibration(cd)
+mxo_fit_calibration(cd, type = "isotonic")
+}

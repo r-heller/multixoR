@@ -17,3 +17,7 @@ A one-row legal-moves tibble (or zero-row at terminal states).
 \description{
 Apply a policy to choose a move
 }
+\examples{
+set.seed(1)
+mxo_policy_move(mxo_policy("random"), mxo_new_game(n = 3L))
+}

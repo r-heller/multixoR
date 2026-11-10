@@ -69,6 +69,9 @@ mxo_policy <- function(type = c("random", "heuristic", "negamax", "mcts"), ...) 
 #' @param x An object.
 #' @return Logical scalar.
 #' @export
+#' @examples
+#' is_mxo_policy(mxo_policy("random"))
+#' is_mxo_policy(list())
 is_mxo_policy <- function(x) inherits(x, "mxo_policy")
 
 #' Apply a policy to choose a move
@@ -77,6 +80,9 @@ is_mxo_policy <- function(x) inherits(x, "mxo_policy")
 #' @param game An `mxo_game` object.
 #' @return A one-row legal-moves tibble (or zero-row at terminal states).
 #' @export
+#' @examples
+#' set.seed(1)
+#' mxo_policy_move(mxo_policy("random"), mxo_new_game(n = 3L))
 mxo_policy_move <- function(policy, game) {
   if (!is_mxo_policy(policy)) {
     cli::cli_abort(

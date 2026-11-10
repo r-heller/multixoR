@@ -31,3 +31,9 @@ includes a \code{dL != 0} step (axis class \code{"timeline"} or \code{"mixed"}).
 rules §12 stress-test number — a value far above the spatial baseline
 suggests the timeline axis may be over-easy and warrants a rule review.
 }
+\examples{
+mxo_timeline_win_rate(mxo_policy("random"), mxo_policy("random"),
+                      n_games = 4L,
+                      config = mxo_config_default(n = 3L, ply_cap = 8L),
+                      seed = 1L)
+}

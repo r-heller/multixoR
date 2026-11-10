@@ -28,3 +28,14 @@ tibble of overall win-rates ordered descending).
 \description{
 Round-robin tournament between policies
 }
+\examples{
+policies <- list(
+  branching = mxo_policy("random"),
+  flat = mxo_policy("random", branch_policy = "none")
+)
+res <- mxo_policy_tournament(policies, n_games = 2L,
+                             config = mxo_config_default(n = 3L, ply_cap = 8L),
+                             seed = 1L)
+res
+attr(res, "ranking")
+}

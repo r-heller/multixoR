@@ -11,6 +11,11 @@
 #' @param ... Unused. Reserved for future arguments.
 #' @return A `ggplot` object.
 #' @export
+#' @examples
+#' rec <- mxo_self_play(mxo_policy("random"), mxo_policy("random"),
+#'                      config = mxo_config_default(n = 3L, ply_cap = 8L),
+#'                      seed = 1L)
+#' mxo_plot_win_prob(rec)
 mxo_plot_win_prob <- function(source, ...) {
   rlang::check_dots_empty()
   data <- .mxo_extract_winprob(source)
@@ -66,6 +71,11 @@ mxo_plot_win_prob <- function(source, ...) {
 #' @param ... Unused.
 #' @return A `ggplot` object.
 #' @export
+#' @examples
+#' rec <- mxo_self_play(mxo_policy("random"), mxo_policy("random"),
+#'                      config = mxo_config_default(n = 3L, ply_cap = 8L),
+#'                      seed = 1L)
+#' mxo_plot_eval(rec)
 mxo_plot_eval <- function(record, ...) {
   rlang::check_dots_empty()
   if (!inherits(record, "mxo_game_record")) {
@@ -99,6 +109,11 @@ mxo_plot_eval <- function(record, ...) {
 #' @param ... Unused.
 #' @return A `ggplot` object.
 #' @export
+#' @examples
+#' ot <- mxo_opening_table(n_games_per_cell = 1L,
+#'                         config = mxo_config_default(n = 3L, ply_cap = 2L),
+#'                         seed = 1L)
+#' mxo_plot_opening(ot, n = 3L)
 mxo_plot_opening <- function(opening_table, n = 4L, d_spatial = 3L, ...) {
   rlang::check_dots_empty()
   call <- rlang::current_env()

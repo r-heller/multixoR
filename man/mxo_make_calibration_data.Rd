@@ -32,3 +32,10 @@ evaluation from the perspective of the position's player-to-move, plus the
 eventual outcome for that player (\code{+1} win, \code{-1} loss, \code{0} draw). The
 resulting tibble feeds \code{\link[=mxo_fit_calibration]{mxo_fit_calibration()}}.
 }
+\examples{
+cd <- mxo_make_calibration_data(
+  n_games = 3L, config = mxo_config_default(n = 3L, ply_cap = 12L),
+  seed = 1L
+)
+table(cd$outcome)
+}

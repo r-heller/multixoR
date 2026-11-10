@@ -17,3 +17,9 @@ A tibble with one row per ply.
 \description{
 Coerce an mxo_game_record to a tidy per-ply tibble
 }
+\examples{
+rec <- mxo_self_play(mxo_policy("random"), mxo_policy("random"),
+                     config = mxo_config_default(n = 3L, ply_cap = 8L),
+                     seed = 1L)
+as_tibble.mxo_game_record(rec)
+}

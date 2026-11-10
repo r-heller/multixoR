@@ -22,3 +22,6 @@ A configuration list.
 \description{
 Default config list (used by self-play / simulate)
 }
+\examples{
+mxo_config_default(n = 3L, ply_cap = 8L)
+}

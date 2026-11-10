@@ -30,3 +30,11 @@ A tibble with one row per branch policy: \code{branch_policy},
 Compare outcomes under different branch policies to quantify whether
 free branching is balanced.
 }
+\examples{
+factory <- function(branch_policy) {
+  mxo_policy("random", branch_policy = branch_policy)
+}
+mxo_branch_study(factory, n_games = 2L,
+                 config = mxo_config_default(n = 3L, ply_cap = 6L),
+                 seed = 1L)
+}

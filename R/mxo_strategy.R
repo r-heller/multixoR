@@ -13,6 +13,12 @@
 #' @return A tibble with columns `idx` (int), `x_win_rate`, `o_win_rate`,
 #'   `draw_rate`, `n_games`.
 #' @export
+#' @examples
+#' # A tiny two-dimensional board keeps the example fast.
+#' mxo_opening_table(n_games_per_cell = 1L,
+#'                   config = mxo_config_default(n = 3L, d_spatial = 2L,
+#'                                               ply_cap = 4L),
+#'                   seed = 1L)
 mxo_opening_table <- function(opponent = mxo_policy("random"),
                               n_games_per_cell = 30L,
                               config = mxo_config_default(),
@@ -87,6 +93,16 @@ mxo_policy_force_first <- function(first, fallback) {
 #'   `o_win_rate`, `draw_rate`, `n_games`, plus an attribute `ranking` (a
 #'   tibble of overall win-rates ordered descending).
 #' @export
+#' @examples
+#' policies <- list(
+#'   branching = mxo_policy("random"),
+#'   flat = mxo_policy("random", branch_policy = "none")
+#' )
+#' res <- mxo_policy_tournament(policies, n_games = 2L,
+#'                              config = mxo_config_default(n = 3L, ply_cap = 8L),
+#'                              seed = 1L)
+#' res
+#' attr(res, "ranking")
 mxo_policy_tournament <- function(policies, n_games = 10L,
                                   config = mxo_config_default(),
                                   seed = NULL) {
@@ -151,6 +167,11 @@ mxo_policy_tournament <- function(policies, n_games = 10L,
 #' @return A tibble with columns `n_games`, `n_wins`, `cross_timeline_wins`,
 #'   `cross_timeline_fraction`, plus a counts-by-axis-class breakdown.
 #' @export
+#' @examples
+#' mxo_timeline_win_rate(mxo_policy("random"), mxo_policy("random"),
+#'                       n_games = 4L,
+#'                       config = mxo_config_default(n = 3L, ply_cap = 8L),
+#'                       seed = 1L)
 mxo_timeline_win_rate <- function(policy_x, policy_o,
                                   n_games = 30L,
                                   config = mxo_config_default(),
@@ -191,6 +212,13 @@ mxo_timeline_win_rate <- function(policy_x, policy_o,
 #'   `x_win_rate`, `o_win_rate`, `draw_rate`, `mean_plies`, `mean_timelines`,
 #'   `cross_timeline_fraction`.
 #' @export
+#' @examples
+#' factory <- function(branch_policy) {
+#'   mxo_policy("random", branch_policy = branch_policy)
+#' }
+#' mxo_branch_study(factory, n_games = 2L,
+#'                  config = mxo_config_default(n = 3L, ply_cap = 6L),
+#'                  seed = 1L)
 mxo_branch_study <- function(policy_factory,
                              n_games = 30L,
                              config = mxo_config_default(),
