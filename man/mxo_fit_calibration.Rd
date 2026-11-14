@@ -15,9 +15,11 @@ mxo_fit_calibration(data, type = c("logistic", "isotonic"))
 An object of class \code{mxo_calibrator}.
 }
 \description{
-Maps the heuristic evaluation score to a \verb{[0, 1]} win probability for the
-player-to-move. Logistic and isotonic fits are supported; both produce
-compact, serialisable \code{mxo_calibrator} objects.
+Maps the heuristic evaluation score to a \verb{[0, 1]} win estimate for the
+player-to-move, conditional on a decisive outcome: draw rows are excluded
+before fitting. Logistic and isotonic fits are supported; both produce
+compact, serialisable \code{mxo_calibrator} objects. Brier and reliability
+summaries describe the fitting data, not held-out predictive performance.
 }
 \examples{
 cd <- mxo_make_calibration_data(

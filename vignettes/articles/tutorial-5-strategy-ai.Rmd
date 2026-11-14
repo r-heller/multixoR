@@ -30,8 +30,12 @@ g <- mxo_example_game()
 mxo_evaluate(g)
 ```
 
-`mxo_win_prob()` maps that score onto a calibrated `[0, 1]` win probability,
-which is easier to reason about than a raw heuristic:
+With `method = "heuristic"`, `mxo_win_prob()` maps that score to a `[0, 1]`
+estimate using the shipped small-board self-play fit. Draws are excluded from
+fitting, so this concerns decisive outcomes in that training setting, not a
+validated probability against any opponent. The default `method = "mcts"`
+instead returns a smoothed expected score with half credit for draws and
+bounded heuristic values for unfinished rollouts:
 
 ```{r winprob}
 mxo_win_prob(g, method = "heuristic")

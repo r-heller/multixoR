@@ -10,9 +10,14 @@
 
 ## Test environments
 
-* local: macOS (aarch64), R 4.6.1, `R CMD check --as-cran` on the
-  `multixoR_0.2.1.tar.gz` source archive, including PDF and HTML manuals
-  (TinyTeX / TeX Live 2026 and HTML Tidy 5.8.0).
+* local: macOS (aarch64), R 4.6.1. The 0.2.1 player-validation source archive
+  passed `R CMD check --as-cran`, including PDF and HTML manuals (TinyTeX /
+  TeX Live 2026 and HTML Tidy 5.8.0).
+* The subsequent documentation-only archive passed
+  `R CMD check --as-cran --no-tests --no-examples`, including rebuilt vignettes
+  and PDF/HTML manuals. The implementation and calibration data are unchanged;
+  the full test results below refer to that same implementation. The separate
+  strategy tutorial, excluded from the CRAN archive, also rendered successfully.
 * Local test suite: 797 assertions passed; 20 tests deliberately skipped in
   CRAN mode. Focused player-validation checks also verified unchanged
   fixed-work MCTS, heuristic and evaluator results for valid players.

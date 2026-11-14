@@ -1,15 +1,6 @@
-# Win-probability mapping.
-#
-# Pass-1 (this file): the heuristic method uses placeholder logistic constants
-# clearly marked PROVISIONAL; the MCTS method derives the win rate directly
-# from the root visit values. Pass-2 (after Stack C self-play) will replace
-# `.mxo_win_prob_constants` with a fitted calibrator, ship it as internal
-# data, and a regression test will pin its outputs.
-
-# Legacy placeholder logistic constants — used as a fallback when the
-# package-internal calibrator (`mxo_calibrator_default` in `R/sysdata.rda`)
-# has not been built yet. Pass-2 of the build replaces them; see
-# `data-raw/make_calibrator.R`.
+# Win estimates from the shipped heuristic calibrator or MCTS root values.
+# Legacy logistic constants are used only if the package-internal fitted
+# calibrator is absent. See data-raw/make_calibrator.R for its build recipe.
 .mxo_win_prob_constants <- list(a = 0.01, b = 0)
 
 # Heuristic -> probability via logistic. Saturates smoothly for large |score|.
@@ -31,18 +22,27 @@
             class = "mxo_calibrator")
 }
 
-#' Probability that a player wins from the current position
+#' Win estimate for a player from the current position
 #'
-#' Maps the engine's evaluation or MCTS visit counts to a `[0, 1]`
-#' probability for `player`. **Pass-1 release:** the heuristic logistic
-#' constants are provisional; they will be refit from Stack C self-play data
-#' in pass-2.
+#' Maps the engine's evaluation or MCTS root values to a `[0, 1]` estimate
+#' for `player`. The interpretation depends on the selected method.
 #'
-#' @section Calibration:
-#' The default `method = "heuristic"` uses placeholder logistic constants
-#' (`.mxo_win_prob_constants` in this package). Pass-2 of the build replaces
-#' them with values fit from `inst/extdata/self_play_results.rds` and pins
-#' the result with a regression test. See `pipeline/00_ORCHESTRATOR.md` §4.
+#' @section Methods and calibration:
+#' The default `method = "mcts"` converts visit-weighted rollout values to
+#' an expected score, counting a draw as half a win, and applies smoothing
+#' towards `0.5`. Unfinished rollouts use a bounded heuristic evaluation.
+#' This is not the probability of a decisive win alone.
+#'
+#' `method = "heuristic"` uses the fitted logistic calibrator shipped in
+#' `R/sysdata.rda`. Its build recipe, `data-raw/make_calibrator.R`, uses a
+#' small batch of random-policy self-play on a `3^3` board. Calibration fits
+#' exclude draws, so this estimate concerns wins among decisive outcomes in
+#' that training setting. It is not validated across all board configurations
+#' or against human players. Legacy logistic constants are used only if the
+#' internal fitted calibrator is absent.
+#'
+#' Both methods return `1` for a terminal win, `0` for a terminal loss and
+#' `0.5` for a terminal draw, without running a search or calibration fit.
 #'
 #' @param game An `mxo_game` object.
 #' @param player Integer scalar, `1L` (X) or `2L` (O). Defaults to the player
@@ -89,10 +89,11 @@ mxo_win_prob <- function(game, player = mxo_to_move(game),
   if (identical(player, mxo_to_move(game))) smoothed else 1 - smoothed
 }
 
-#' Win-probability curve along a game history
+#' Win-estimate curve along a game history
 #'
-#' Replays the history one ply at a time and returns the win probability for
-#' each player after every ply.
+#' Replays the history one ply at a time and returns the method-specific win
+#' estimate for each player after every ply. See [mxo_win_prob()] for the
+#' interpretation of heuristic and MCTS estimates.
 #'
 #' @param game An `mxo_game` object whose `history` will be replayed.
 #' @param method Win-probability method, forwarded to [mxo_win_prob()].

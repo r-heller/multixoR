@@ -2,7 +2,7 @@
 % Please edit documentation in R/mxo_win_prob.R
 \name{mxo_win_prob_curve}
 \alias{mxo_win_prob_curve}
-\title{Win-probability curve along a game history}
+\title{Win-estimate curve along a game history}
 \usage{
 mxo_win_prob_curve(game, method = c("heuristic", "mcts"), ...)
 }
@@ -19,8 +19,9 @@ A type-stable tibble with columns \code{ply} (int), \code{player} (int),
 \code{win_prob} (dbl).
 }
 \description{
-Replays the history one ply at a time and returns the win probability for
-each player after every ply.
+Replays the history one ply at a time and returns the method-specific win
+estimate for each player after every ply. See \code{\link[=mxo_win_prob]{mxo_win_prob()}} for the
+interpretation of heuristic and MCTS estimates.
 }
 \examples{
 g <- mxo_new_game(n = 3L, k = 3L)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mxo_win_prob.R
 \name{mxo_win_prob}
 \alias{mxo_win_prob}
-\title{Probability that a player wins from the current position}
+\title{Win estimate for a player from the current position}
 \usage{
 mxo_win_prob(
   game,
@@ -27,17 +27,26 @@ and other values are rejected, including for terminal games.}
 A numeric scalar in \verb{[0, 1]}.
 }
 \description{
-Maps the engine's evaluation or MCTS visit counts to a \verb{[0, 1]}
-probability for \code{player}. \strong{Pass-1 release:} the heuristic logistic
-constants are provisional; they will be refit from Stack C self-play data
-in pass-2.
+Maps the engine's evaluation or MCTS root values to a \verb{[0, 1]} estimate
+for \code{player}. The interpretation depends on the selected method.
 }
-\section{Calibration}{
+\section{Methods and calibration}{
 
-The default \code{method = "heuristic"} uses placeholder logistic constants
-(\code{.mxo_win_prob_constants} in this package). Pass-2 of the build replaces
-them with values fit from \code{inst/extdata/self_play_results.rds} and pins
-the result with a regression test. See \verb{pipeline/00_ORCHESTRATOR.md} §4.
+The default \code{method = "mcts"} converts visit-weighted rollout values to
+an expected score, counting a draw as half a win, and applies smoothing
+towards \code{0.5}. Unfinished rollouts use a bounded heuristic evaluation.
+This is not the probability of a decisive win alone.
+
+\code{method = "heuristic"} uses the fitted logistic calibrator shipped in
+\code{R/sysdata.rda}. Its build recipe, \code{data-raw/make_calibrator.R}, uses a
+small batch of random-policy self-play on a \code{3^3} board. Calibration fits
+exclude draws, so this estimate concerns wins among decisive outcomes in
+that training setting. It is not validated across all board configurations
+or against human players. Legacy logistic constants are used only if the
+internal fitted calibrator is absent.
+
+Both methods return \code{1} for a terminal win, \code{0} for a terminal loss and
+\code{0.5} for a terminal draw, without running a search or calibration fit.
 }
 
 \examples{
