@@ -1,3 +1,9 @@
+# multixoR 0.2.1
+
+* Reject missing, fractional, nonnumeric and out-of-range player values in
+  `mxo_evaluate()` and `mxo_win_prob()` before coercion or terminal-state
+  returns. Valid player perspectives and numerical results are unchanged.
+
 # multixoR 0.2.0
 
 ## CRAN preparation

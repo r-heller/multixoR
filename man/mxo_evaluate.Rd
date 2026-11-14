@@ -16,7 +16,8 @@ mxo_evaluate(
 \item{game}{An \code{mxo_game} object.}
 
 \item{player}{Integer scalar, the perspective player (\code{1L} for X, \code{2L} for
-O). Defaults to the player to move.}
+O). Integer-valued numeric scalars are accepted; missing, fractional and
+other values are rejected before evaluation. Defaults to the player to move.}
 
 \item{w}{Numeric vector of length \code{k} giving the per-m-line weights. The
 default is exponential: \verb{1, 8, 64, ...}.}

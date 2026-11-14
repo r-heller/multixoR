@@ -15,7 +15,8 @@ mxo_win_prob(
 \item{game}{An \code{mxo_game} object.}
 
 \item{player}{Integer scalar, \code{1L} (X) or \code{2L} (O). Defaults to the player
-to move.}
+to move. Integer-valued numeric scalars are accepted; missing, fractional
+and other values are rejected, including for terminal games.}
 
 \item{method}{One of \code{"mcts"} or \code{"heuristic"}. Default \code{"mcts"}.}
 

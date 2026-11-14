@@ -1,3 +1,13 @@
+# Validate before coercion, including paths that return early for terminal games.
+.mxo_validate_player <- function(player, call = rlang::caller_env()) {
+  if (!is.numeric(player) || is.complex(player) || length(player) != 1L ||
+      !is.null(dim(player)) || is.na(player) || !is.finite(player) ||
+      !(player %in% c(1, 2))) {
+    cli::cli_abort("{.arg player} must be a numeric scalar equal to {.val 1} or {.val 2}.", call = call)
+  }
+  as.integer(player)
+}
+
 # Heuristic position evaluator.
 #
 # Counts m-lines (length-k extents with `m` marks of one colour and the rest
@@ -135,7 +145,8 @@
 #'
 #' @param game An `mxo_game` object.
 #' @param player Integer scalar, the perspective player (`1L` for X, `2L` for
-#'   O). Defaults to the player to move.
+#'   O). Integer-valued numeric scalars are accepted; missing, fractional and
+#'   other values are rejected before evaluation. Defaults to the player to move.
 #' @param w Numeric vector of length `k` giving the per-m-line weights. The
 #'   default is exponential: `1, 8, 64, ...`.
 #' @param w_timeline Numeric multiplier applied to m-lines whose direction
@@ -156,10 +167,7 @@ mxo_evaluate <- function(game,
   if (!is_mxo_game(game)) {
     cli::cli_abort("{.arg game} must be an {.cls mxo_game} object.", call = call)
   }
-  if (!is.numeric(player) || length(player) != 1L) {
-    cli::cli_abort("{.arg player} must be {.val 1} or {.val 2}.", call = call)
-  }
-  player <- as.integer(player)
+  player <- .mxo_validate_player(player, call = call)
   cfg <- game$config
   k <- cfg$k
   if (is.null(w)) w <- 8 ^ (seq_len(k) - 1L)

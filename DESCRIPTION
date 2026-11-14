@@ -1,6 +1,6 @@
 Package: multixoR
 Title: Five-Dimensional Multiverse Tic-Tac-Toe
-Version: 0.2.0
+Version: 0.2.1
 Authors@R:
     person(given = "R.",
            family = "Heller",

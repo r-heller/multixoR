@@ -46,7 +46,8 @@
 #'
 #' @param game An `mxo_game` object.
 #' @param player Integer scalar, `1L` (X) or `2L` (O). Defaults to the player
-#'   to move.
+#'   to move. Integer-valued numeric scalars are accepted; missing, fractional
+#'   and other values are rejected, including for terminal games.
 #' @param method One of `"mcts"` or `"heuristic"`. Default `"mcts"`.
 #' @param ... Additional arguments forwarded to [mxo_mcts()] when
 #'   `method = "mcts"` or to [mxo_evaluate()] when `method = "heuristic"`.
@@ -62,7 +63,7 @@ mxo_win_prob <- function(game, player = mxo_to_move(game),
     cli::cli_abort("{.arg game} must be an {.cls mxo_game} object.", call = call)
   }
   method <- match.arg(method)
-  player <- as.integer(player)
+  player <- .mxo_validate_player(player, call = call)
   if (mxo_is_terminal(game)) {
     if (game$status == "draw") return(0.5)
     return(if (identical(game$winner, player)) 1 else 0)
