@@ -24,7 +24,9 @@ mxo_evaluate(
 - player:
 
   Integer scalar, the perspective player (`1L` for X, `2L` for O).
-  Defaults to the player to move.
+  Integer-valued numeric scalars are accepted; missing, fractional and
+  other values are rejected before evaluation. Defaults to the player to
+  move.
 
 - w:
 

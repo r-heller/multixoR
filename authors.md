@@ -11,12 +11,12 @@ Source:
 [`DESCRIPTION`](https://github.com/r-heller/multixoR/blob/main/DESCRIPTION)
 
 Heller R (2026). *multixoR: Five-Dimensional Multiverse Tic-Tac-Toe*. R
-package version 0.2.0, <https://github.com/r-heller/multixoR>.
+package version 0.2.1, <https://github.com/r-heller/multixoR>.
 
     @Manual{,
       title = {multixoR: Five-Dimensional Multiverse Tic-Tac-Toe},
       author = {R. Heller},
       year = {2026},
-      note = {R package version 0.2.0},
+      note = {R package version 0.2.1},
       url = {https://github.com/r-heller/multixoR},
     }

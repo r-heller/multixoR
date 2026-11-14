@@ -25,6 +25,8 @@ mxo_win_prob(
 - player:
 
   Integer scalar, `1L` (X) or `2L` (O). Defaults to the player to move.
+  Integer-valued numeric scalars are accepted; missing, fractional and
+  other values are rejected, including for terminal games.
 
 - method:
 
