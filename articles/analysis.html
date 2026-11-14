@@ -178,12 +178,18 @@ random or heuristic rollouts. It’s seedable for reproducibility.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> present     0     1     2      2</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="win-probability-calibrated">Win probability, calibrated<a class="anchor" aria-label="anchor" href="#win-probability-calibrated"></a>
+<h2 id="interpreting-win-estimates">Interpreting win estimates<a class="anchor" aria-label="anchor" href="#interpreting-win-estimates"></a>
 </h2>
-<p><code><a href="../reference/mxo_win_prob.html">mxo_win_prob()</a></code> maps either the evaluator score (via the
-package’s internal calibrator, see
-<code>data-raw/make_calibrator.R</code>) or the MCTS visit distribution
-to a <code>[0, 1]</code> win probability for a chosen player.</p>
+<p><code><a href="../reference/mxo_win_prob.html">mxo_win_prob()</a></code> defaults to MCTS and returns a smoothed
+expected score with half credit for draws and bounded heuristic values
+for unfinished rollouts. With <code>method = "heuristic"</code>, it uses
+the shipped logistic fit from small-board random-policy self-play; draw
+rows are excluded from that fit, so the estimate concerns decisive
+outcomes in its training setting. See
+<code>data-raw/make_calibrator.R</code> for the recipe. Fit diagnostics
+are not held-out validation, and neither method is a guaranteed win
+probability against people or across board configurations. Terminal
+draws return 0.5.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/mxo_win_prob.html">mxo_win_prob</a></span><span class="op">(</span><span class="va">small</span>, player <span class="op">=</span> <span class="fl">1L</span>, method <span class="op">=</span> <span class="st">"heuristic"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.5428756</span></span></code></pre></div>

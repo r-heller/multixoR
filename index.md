@@ -67,9 +67,16 @@ pass `time_budget = NULL`, a seed and explicit
 rollouts by default. Search ratings rank negamax scores; their
 `win_prob` column remains a one-ply heuristic estimate and `label` is
 `NA`, since search scores do not have a validated probability
-calibration. The shipped calibrator is based on small-board self-play,
-not a guarantee of outcomes against people or across all board
-configurations.
+calibration.
+[`mxo_win_prob()`](https://r-heller.github.io/multixoR/reference/mxo_win_prob.md)
+defaults to MCTS: its smoothed expected score counts a draw as half a
+win, with bounded heuristic values for unfinished rollouts. With
+`method = "heuristic"`, it uses the shipped fitted logistic calibrator
+from small-board random-policy self-play, excluding draw rows when
+fitting. That estimate concerns decisive outcomes in the training
+setting; its fit diagnostics do not establish held-out performance
+against people or across all board configurations. Both methods return
+0.5 for a terminal draw.
 
 Simulate self-play and analyse:
 

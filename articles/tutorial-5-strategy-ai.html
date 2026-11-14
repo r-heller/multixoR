@@ -134,9 +134,14 @@ across all axis classes:</p>
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mxo_example_game.html">mxo_example_game</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/mxo_evaluate.html">mxo_evaluate</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] -255</span></span></code></pre></div>
-<p><code><a href="../reference/mxo_win_prob.html">mxo_win_prob()</a></code> maps that score onto a calibrated
-<code>[0, 1]</code> win probability, which is easier to reason about
-than a raw heuristic:</p>
+<p>With <code>method = "heuristic"</code>, <code><a href="../reference/mxo_win_prob.html">mxo_win_prob()</a></code>
+maps that score to a <code>[0, 1]</code> estimate using the shipped
+small-board self-play fit. Draws are excluded from fitting, so this
+concerns decisive outcomes in that training setting, not a validated
+probability against any opponent. The default
+<code>method = "mcts"</code> instead returns a smoothed expected score
+with half credit for draws and bounded heuristic values for unfinished
+rollouts:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/mxo_win_prob.html">mxo_win_prob</a></span><span class="op">(</span><span class="va">g</span>, method <span class="op">=</span> <span class="st">"heuristic"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.5423645</span></span></code></pre></div>
@@ -192,7 +197,7 @@ rollouts):</p>
 <span><span class="va">mcts</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">MCTS result</span> <span style="color: #00BBBB;">─────────────────────────────────────────────────────────────────</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Iterations: 40 (elapsed 8.96s)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Iterations: 40 (elapsed 11.7s)</span></span>
 <span><span class="co">#&gt; → present L0 t0 idx0: N=2, Q=1</span></span>
 <span><span class="co">#&gt; → present L0 t0 idx1: N=2, Q=0</span></span>
 <span><span class="co">#&gt; → present L0 t0 idx3: N=2, Q=1</span></span>

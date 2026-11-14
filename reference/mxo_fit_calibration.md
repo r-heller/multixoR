@@ -1,8 +1,11 @@
 # Fit a calibrator from calibration data
 
-Maps the heuristic evaluation score to a `[0, 1]` win probability for
-the player-to-move. Logistic and isotonic fits are supported; both
-produce compact, serialisable `mxo_calibrator` objects.
+Maps the heuristic evaluation score to a `[0, 1]` win estimate for the
+player-to-move, conditional on a decisive outcome: draw rows are
+excluded before fitting. Logistic and isotonic fits are supported; both
+produce compact, serialisable `mxo_calibrator` objects. Brier and
+reliability summaries describe the fitting data, not held-out predictive
+performance.
 
 ## Usage
 

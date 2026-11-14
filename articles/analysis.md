@@ -86,12 +86,18 @@ mc$move
 #> 1 present     0     1     2      2
 ```
 
-## Win probability, calibrated
+## Interpreting win estimates
 
 [`mxo_win_prob()`](https://r-heller.github.io/multixoR/reference/mxo_win_prob.md)
-maps either the evaluator score (via the package’s internal calibrator,
-see `data-raw/make_calibrator.R`) or the MCTS visit distribution to a
-`[0, 1]` win probability for a chosen player.
+defaults to MCTS and returns a smoothed expected score with half credit
+for draws and bounded heuristic values for unfinished rollouts. With
+`method = "heuristic"`, it uses the shipped logistic fit from
+small-board random-policy self-play; draw rows are excluded from that
+fit, so the estimate concerns decisive outcomes in its training setting.
+See `data-raw/make_calibrator.R` for the recipe. Fit diagnostics are not
+held-out validation, and neither method is a guaranteed win probability
+against people or across board configurations. Terminal draws return
+0.5.
 
 ``` r
 

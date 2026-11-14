@@ -20,9 +20,14 @@ mxo_evaluate(g)
 #> [1] -255
 ```
 
+With `method = "heuristic"`,
 [`mxo_win_prob()`](https://r-heller.github.io/multixoR/reference/mxo_win_prob.md)
-maps that score onto a calibrated `[0, 1]` win probability, which is
-easier to reason about than a raw heuristic:
+maps that score to a `[0, 1]` estimate using the shipped small-board
+self-play fit. Draws are excluded from fitting, so this concerns
+decisive outcomes in that training setting, not a validated probability
+against any opponent. The default `method = "mcts"` instead returns a
+smoothed expected score with half credit for draws and bounded heuristic
+values for unfinished rollouts:
 
 ``` r
 
@@ -89,7 +94,7 @@ mcts <- mxo_mcts(
 mcts
 #> 
 #> ── MCTS result ─────────────────────────────────────────────────────────────────
-#> ℹ Iterations: 40 (elapsed 8.96s)
+#> ℹ Iterations: 40 (elapsed 11.7s)
 #> → present L0 t0 idx0: N=2, Q=1
 #> → present L0 t0 idx1: N=2, Q=0
 #> → present L0 t0 idx3: N=2, Q=1

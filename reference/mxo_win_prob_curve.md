@@ -1,7 +1,9 @@
-# Win-probability curve along a game history
+# Win-estimate curve along a game history
 
-Replays the history one ply at a time and returns the win probability
-for each player after every ply.
+Replays the history one ply at a time and returns the method-specific
+win estimate for each player after every ply. See
+[`mxo_win_prob()`](https://r-heller.github.io/multixoR/reference/mxo_win_prob.md)
+for the interpretation of heuristic and MCTS estimates.
 
 ## Usage
 

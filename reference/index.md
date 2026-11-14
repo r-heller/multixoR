@@ -85,10 +85,10 @@ State, moves, history, and accessors.
   Print an `mxo_mcts_result`
 
 - [`mxo_win_prob()`](https://r-heller.github.io/multixoR/reference/mxo_win_prob.md)
-  : Probability that a player wins from the current position
+  : Win estimate for a player from the current position
 
 - [`mxo_win_prob_curve()`](https://r-heller.github.io/multixoR/reference/mxo_win_prob_curve.md)
-  : Win-probability curve along a game history
+  : Win-estimate curve along a game history
 
 - [`mxo_rate_moves()`](https://r-heller.github.io/multixoR/reference/mxo_rate_moves.md)
   : Rate the legal moves of a position

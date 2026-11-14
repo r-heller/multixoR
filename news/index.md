@@ -2,6 +2,11 @@
 
 ## multixoR 0.2.1
 
+- Clarify the default MCTS score, half-credit draw convention, shipped
+  heuristic calibrator and limits of its decisive-outcome training fit.
+  Calibration diagnostics describe fitting data, not held-out
+  performance.
+
 - Reject missing, fractional, nonnumeric and out-of-range player values
   in
   [`mxo_evaluate()`](https://r-heller.github.io/multixoR/reference/mxo_evaluate.md)
